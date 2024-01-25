@@ -51,3 +51,46 @@ p, span {
     background-color: var(--Background-Hight-Plus);
   }
 }
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 2%;
+
+  > .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 85px;
+    width: 100%;
+    padding: 0 2%;
+
+    > div {
+      display: flex;
+      align-items: center;
+
+      &.nav-logo {
+        justify-content: left;
+        flex: 1;
+      }
+
+      &.nav-center {
+        justify-content: center;
+        flex: 3;
+      }
+
+      &.nav-link {
+        justify-content: right;
+        flex: 1;
+      }
+    }
+
+
+
+    img {
+      height: 70px;
+    }
+  }
+
+}
