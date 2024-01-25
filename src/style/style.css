@@ -58,4 +58,11 @@ p, span {
   background: var(--Background-Hight-Plus);
 }
 
+.hover {
+  transition: background-color 0.5s ease-in-out;
+}
+.hover:hover {
+  background-color: var(--Background-Hight-Plus);
+}
+
 /*# sourceMappingURL=style.css.map */
