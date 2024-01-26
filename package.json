@@ -13,10 +13,11 @@
   },
   "scripts": {
     "sass": "sass --watch src/style/style.scss:src/style/style.css",
-    "dev": "nodemon server.js",
+    "dev": "nodemon server.js && npmrun sass",
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build --ssrManifest --outDir dist/client",
-    "build:server": "vite build --ssr src/server/entry-server.js --outDir dist/server",
+    "build:server": "vite build --ssr src/entry-server.js --outDir dist/server",
+    "build:start": "npm run build && cross-env NODE_ENV=production node server.js",
     "preview": "cross-env NODE_ENV=production node server"
   }
 }
