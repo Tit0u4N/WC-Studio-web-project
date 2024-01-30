@@ -2,7 +2,37 @@ import './style/style.scss'
 import Alpine from 'alpinejs'
 import {AccountAlpineData} from "./SSR/pages/Account.js";
 
-Alpine.data('account', AccountAlpineData)
+const getPageByURL = () => {
+    const path = window.location.pathname.replace('/', '');
+    switch (path) {
+        case 'login':
+            return 'login';
+        case 'account':
+            return 'account';
+        case 'shop':
+            return 'shop';
+        default:
+            return 'home';
+    }
+};
 
-Alpine.start()
+Alpine.store('pages', {
+    showing: getPageByURL(),
+    isShowing(page) {
+        return this.showing === page;
+    },
+    setShowing(page) {
+        this.showing = page;
+    },
+});
+
+Alpine.data('account', AccountAlpineData);
+
+window.addEventListener('alpine:init', () => {
+    setTimeout(() => {
+        document.getElementById("pageLoader").classList.add("!hidden")
+    }, 1000);
+});
+
+Alpine.start();
 
