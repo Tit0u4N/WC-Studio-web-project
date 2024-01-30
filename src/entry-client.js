@@ -21,7 +21,8 @@ Alpine.store('pages', {
     isShowing(page) {
         return this.showing === page;
     },
-    setShowing(page) {
+    set(page) {
+        if (this.showing === page) return;
         this.showing = page;
     },
 });
