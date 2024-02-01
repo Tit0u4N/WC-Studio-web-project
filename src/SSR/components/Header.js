@@ -1,6 +1,6 @@
 export const Header = `
-    <header class="flex justify-center items-center">
-        <nav x-data class="flex justify-between items-center container px-4">
+    <header class="flex justify-center items-center p-4">
+        <nav x-data class="flex justify-between items-center container-style w-full px-4">
             <div class="basis-1/4">
                 <a x-on:click="$store.pages.set('home')" class="cursor-pointer"><img src="/assets/images/Logo-WC-Studio.png" alt="Logo WC Studio"></a>
             </div>
