@@ -30,11 +30,11 @@ h2 {
   line-height: 2.5rem;
 }
 
-p, span {
-  color: var(--Text-paragraphe);
-  font-size: 1.5rem;
-  font-weight: 100;
-  line-height: 1.5rem;
+p, span,a {
+    color: var(--Text-paragraphe);
+    font-size: 1.5rem;
+    font-weight: 100;
+    line-height: 1.5rem;
 }
 
 .container-style {
