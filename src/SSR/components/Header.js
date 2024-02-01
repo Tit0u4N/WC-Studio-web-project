@@ -10,15 +10,14 @@ export const Header = `
             <div class="basis-1/4 flex justify-end gap-3 ">
                 <div class="relative">
                     <a x-on:click="$store.pages.set('shop')" class="cursor-pointer"><img src="/assets/images/Shop.png" alt="SHOP" class="hover:invert"></a>
-                    <div class="h-0">
-                        <span class="money font-bold relative " id="money">500</span>
-                        <img class="money relative " src="/assets/images/Money.png" alt="Logo money"></a>
+                    <div class="money h-0">
+                        <span class="font-bold relative " id="money">1000</span>
+                        <img class="relative " src="/assets/images/Money.png" alt="Logo money"></a>
                     </div>
                 </div>
                
                 <a x-on:click="$store.pages.set('account')" class="cursor-pointer"><img src="/assets/images/User.png" alt="Account" class="hover:invert"></a>
             </div>
             
-    
         </nav>
     </header>`

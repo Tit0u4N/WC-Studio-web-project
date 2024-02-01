@@ -11,23 +11,22 @@ header {
     .money {
       justify-content: flex-end;
       display: flex;
-      font-size: 1.5rem;
-      transform: translateY(-20px);
-    }
-      span.money {
+      font-size: 0.5rem;
+      translate: 10px -10px;
+
+      > span {
         margin-right: 10px;
         font-weight: 100;
         color: var(--Text-paragraphe);
-      }
+        }
 
-      img.money {
-        height: 20px !important;
+      > img {
+        height: 30px !important;
         width: auto;
+        translate: -5px -5px;
       }
-
+    }
   }
-
-
 
 
 }
