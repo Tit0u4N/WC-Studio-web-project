@@ -6,22 +6,28 @@
   font-family: 'Kufam', sans-serif;
 }
 
+#app {
+  min-height: 100vh;
+  display: flex;
+    flex-direction: column;
+}
+
 html {
   background: var(--Background-Deep);
 }
 
 h1 {
-    color: var(--Heading);
-    font-size: 3.5rem;
-    font-weight: 900;
-    line-height: 3.5rem;
+  color: var(--Heading);
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 3.5rem;
 }
 
 h2 {
-    color: var(--Heading-2);
-    font-size: 2.5rem;
-    font-weight: 900;
-    line-height: 2.5rem;
+  color: var(--Heading-2);
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 2.5rem;
 }
 
 p, span,a {
@@ -31,15 +37,42 @@ p, span,a {
     line-height: 1.5rem;
 }
 
-.container {
-
+.container-style {
   background: var(--Background-Hight);
   border-radius: 25px;
 
   &--hight {
     background: var(--Background-Hight-Plus);
   }
+}
 
+.button-hover {
+  transition: background-color 0.1s ease-in-out;
+  background-color: var(--Background-Hight-Plus);
+  color: var(--Text-paragraphe);
+  font-size: 24px;
+
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 15px;
+
+  > span {
+    font-weight: 600;
+  }
+
+  &:hover {
+    background-color: var(--Background-Hover);
+  }
+}
+
+.page {
+  height: 100%;
+  width: 100vw;
+  flex: auto;
+
+  display: flex;
+  flex-direction: column;
 }
 
 // Event
@@ -51,3 +84,4 @@ p, span,a {
     background-color: var(--Background-Hight-Plus);
   }
 }
+
