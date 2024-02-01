@@ -26,7 +26,7 @@ Alpine.store('pages', {
     },
 });
 
-Alpine.data('account', AccountAlpineData);
+Alpine.data(AccountAlpineData.dataKey, AccountAlpineData.data);
 
 window.addEventListener('alpine:init', () => {
     setTimeout(() => {
