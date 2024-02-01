@@ -1,4 +1,4 @@
-export const Inventory = (id = "Inventory") => {
+export const Informations = (id = "Informations") => {
     return `
         <div>
             <h1>${id}</h1>
