@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises'
 import express from 'express'
+import {Memory} from "./src/SSR/games/memory/Memory.js";
 
 // Constants
 const isProduction = process.env.NODE_ENV === 'production'
@@ -36,24 +37,34 @@ if (!isProduction) {
 }
 
 // Serve HTML
-app.use('*', async (req, res) => {
+
+const isGame = (req) => {
+    return req.originalUrl.startsWith('/game')
+}
+
+const getRenderedTemplate = async (req) => {
+    let rendered
+    let entryServer
+    let template
+    if (!isProduction) {
+        template = await fs.readFile('./index.html', 'utf-8')
+        template = await vite.transformIndexHtml(req.originalUrl, template)
+        entryServer = await vite.ssrLoadModule('/src/entry-server.js')
+    } else {
+        template = templateHtml
+        entryServer = (await import('./dist/server/entry-server.js'))
+    }
+    if (isGame(req)) {
+        rendered = entryServer.renderGame(req.originalUrl.replace('/game/', ''))
+    } else {
+        rendered = entryServer.render(req.originalUrl, ssrManifest)
+    }
+    return {rendered, template}
+}
+
+app.use('*', async (req, res, next) => {
     try {
-        const url = req.originalUrl.replace(base, '')
-
-        let template
-        let render
-        if (!isProduction) {
-            // Always read fresh template in development
-            template = await fs.readFile('./index.html', 'utf-8')
-            template = await vite.transformIndexHtml(url, template)
-            render = (await vite.ssrLoadModule('/src/entry-server.js')).render
-        } else {
-            template = templateHtml
-            render = (await import('./dist/server/entry-server.js')).render
-        }
-
-        const rendered = await render(url, ssrManifest)
-
+        const {rendered, template} = await getRenderedTemplate(req)
         const html = template
             .replace(`<!--app-head-->`, rendered.head ?? '')
             .replace(`<!--app-html-->`, rendered.html ?? '')
