@@ -1,6 +1,7 @@
 import './style/style.scss'
 import Alpine from 'alpinejs'
 import {AccountAlpineData} from "./SSR/pages/Account.js";
+import {RankBoardAlpineData} from "./SSR/components/RankBoard.js";
 
 const getPageByURL = () => {
     const path = window.location.pathname.replace('/', '');
@@ -28,6 +29,7 @@ Alpine.store('pages', {
 });
 
 Alpine.data(AccountAlpineData.dataKey, AccountAlpineData.data);
+Alpine.data(RankBoardAlpineData.dataKey, RankBoardAlpineData.data);
 
 window.addEventListener('alpine:init', () => {
     setTimeout(() => {
