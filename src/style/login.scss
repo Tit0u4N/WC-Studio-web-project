@@ -1,0 +1,53 @@
+/*
+#password:focus{
+  outline: none !important;
+  border: none !important;
+}
+#password::placeholder{
+  font-style: italic;
+}
+
+#username::placeholder{
+  font-style: italic;
+}
+*/
+
+input::placeholder{
+  font-style: italic;
+  color: var(--Placeholder);
+  outline: none !important;
+  border: none !important;
+}
+
+/*
+
+#login-button{
+  // tailwind => bg-[#4F356E]
+  border: 4px;
+  border: var(--VGradient-blue-to-red);
+}
+ */
+
+#div-under-login-button{
+  // background-color: white;
+  padding: 2px !important;
+  background: var(--VGradient-red-to-blue);
+}
+
+#div-under-login-button:hover{
+  background: var(--VGradient-blue-to-red) !important;
+}
+
+#div-under-login-button:focus{
+  background: var(--VGradient-red-to-blue);
+}
+
+#login-button{
+  /*
+  max-height: 50px;
+  max-width: 400px;
+  */
+
+  //border-color: var(--VGradient-blue-to-red);
+}
+
