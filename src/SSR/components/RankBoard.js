@@ -2,44 +2,76 @@ const dataKey = 'rankBoard';
 
 const playerRow = (index) => {
     return `
-        <div class="flex">
-            <div class="border px-4 py-2 w-1/4">
-                <span x-text="${index+1}" class="block text-center"></span>
+        <div class="flex ">
+            <div class=" border-r-2 border-t-2 px-4 py-2 w-2/12">
+                <span x-text="getPlayerData(${index}).position" class="text-center "></span>
             </div>
-            <div class="border px-4 py-2 w-1/4">
-                <span x-text="getPlayerData(${index}).name" class="block text-center"></span>
+            <div class="border-r-2 border-t-2 px-4 py-2 w-6/12">
+                <span x-text="getPlayerData(${index}).name" class="  text-center  "></span>
             </div>
-            <div class="border px-4 py-2 w-1/4">
-                <span x-text="getPlayerData(${index}).score" class="block text-center"></span>
+            <div class="border-r-2 border-t-2 px-4 py-2 w-4/12">
+                <span x-text="getPlayerData(${index}).score" class=" text-center"></span>
             </div>
-            <div class="border px-4 py-2 w-1/4">
-                <span x-text="getPlayerData(${index}).success" class="block text-center"></span>
+            <div class=" border-t-2 px-4 py-2 w-4/12">
+                <span x-text="getPlayerData(${index}).success" class=" text-center"></span>
             </div>
         </div>
     `;
 };
+
+
+const renderFilter = () => {
+return `
+    <div class="flex flex-col [80%]: flex-row">
+        <div x-on:click="keepGame('all')" :class="{ 'bg-purple-200': selectedGame === 'all' }" class="cursor-pointer text-white p-2 w-full md:w-auto md:hover:bg-gray-300 md:rounded-md mb-2 md:mb-0">All</div>
+
+        <template x-for="(game, index) in getGames()" :key="game">
+            <div x-on:click="keepGame(game)" :class="{ 'bg-purple-200': selectedGame === game }" class="cursor-pointer text-white p-2 w-full md:w-auto md:hover:bg-purple-300 transition duration-300 ease-in-out rounded-md mb-2 md:mb-0" x-text="game"></div>
+        </template>
+
+        <button x-on:click="showMoreGames" class="cursor-pointer text-black p-2 bg-purple-100 hover:bg-purple-300 transition duration-300 ease-in-out rounded-md w-full md:w-auto">More</button>
+    </div>
+`;
+
+};
+
 
 const renderHeaderTable = () => {
     return `
-    <div class="flex items-center">
-    <select class="border px-4 py-2 w-1/4" x-on:change="keepGame($event.target.value)">
-    <option value="all">All</option>
-    <template x-for="game in getGames()">
-        <option x-text="game" x-bind:value="game"></option>
-    </template>
-    </select>
-    
-    </div>
-        
-        <div class="flex">
-            <div class="border bg-gray-200 px-4 py-2 w-1/4">Rank</div>
-            <div class="border bg-gray-200 px-4 py-2 w-1/4">Name</div>
-            <div class="border bg-gray-200 px-4 py-2 w-1/4" x-on:click="sortByPoints()" x-bind:class="{ 'bg-purple-200': pointSelected }">Points</div>
-            <div class="border bg-gray-200 px-4 py-2 w-1/4" x-on:click="sortBySuccess()" x-bind:class="{ 'bg-purple-200': !pointSelected}">Success</div>
-        </div>
+       <div class="flex text-white">
+    <div class="border-t-2 px-4 py-2  w-2/12">#</div>
+    <div class="border-t-2 px-4 py-2 w-6/12">Name</div>
+    <div class="border-t-2 px-4 py-2 w-4/12 hover:bg-purple-300 transition duration-300 ease-in-out " x-on:click="sortByPoints()" x-bind:class="{'bg-purple-200 rounded-md ': pointSelected }">Points</div>
+    <div class="border-t-2 px-4 py-2 w-4/12 hover:bg-purple-300 transition duration-300 ease-in-out " x-on:click="sortBySuccess()" x-bind:class="{ 'bg-purple-200 rounded-md ': !pointSelected}">Success</div>
+</div>
     `;
 
 };
+
+const renderPlayerPagesNavigation = () => {
+    return `
+            <div class="flex items-center space-x-2 justify-center">
+    <button x-on:click="showPastPlayersPage" class="cursor-pointer text-white p-2  hover:bg-purple-300 transition duration-300 ease-in-out rounded-md">
+        &larr; <!-- Flèche vers la gauche -->
+    </button>
+    
+    <template x-for="index in getNumberPlayerPages()" :key="index">
+        <button
+            x-on:click="getToPlayerPages(index)"
+            :class="{ 'bg-purple-200': currentPlayersPages === index-1 }"
+            class="cursor-pointer text-white p-2 hover:bg-purple-300 transition duration-300 ease-in-out rounded-md"
+            x-text="index"
+        ></button>
+    </template>
+
+    <button x-on:click="showNextPlayersPage" class="cursor-pointer text-white p-2  hover:bg-purple-300 transition duration-300 ease-in-out rounded-md">
+        &rarr; <!-- Flèche vers la droite -->
+    </button>
+</div>
+ 
+`;
+
+}
 
 
 
@@ -68,10 +100,15 @@ const renderPlayerTable = () => {
 
 
 export const RankBoard = `
-    <h1 class="text-4xl font-bold mb-6">Classement des Joueurs</h1>
-    <div x-data="${dataKey}" x-init="initPlayersData()" class="w-2/4 mx-auto float-right">
-            ${renderHeaderTable()}
-            ${renderPlayerTable()}
+    <div x-data="${dataKey}" x-init="initPlayersData()" class="rankBoard w-1/4 mx-auto float-right  rounded-3xl border-2 ">
+            <h1 class="font-bold text-center">Rank</h1>
+            ${renderFilter()}
+            <div class="flex flex-col overflow-auto ">
+                ${renderHeaderTable()}
+                ${renderPlayerTable()}
+            </div>
+            ${renderPlayerPagesNavigation()}
+
 
     </div>
 `;
@@ -79,8 +116,7 @@ export const RankBoard = `
 
 export const RankBoardAlpineData = { dataKey, data : () => ({
         initPlayersData() {
-            for (let i = 0; i < 10; i++) {
-
+            for (let i = 0; i < 100; i++) {
                 this.playersData.push({
                     name: `Player${i}`,
                     score : 0,
@@ -89,8 +125,8 @@ export const RankBoardAlpineData = { dataKey, data : () => ({
                 });
                 for (let j = 0; j < this.games.length; j++) {
                     this.playersData[i].game[this.games[j]] = {
-                        score: Math.floor(Math.random() * 100),
-                        success: Math.floor(Math.random() * 100)
+                        score: Math.floor(Math.random() * 1000),
+                        success: Math.floor(Math.random() * 10)
                     }
                     this.playersData[i].score += this.playersData[i].game[this.games[j]].score;
                     this.playersData[i].success += this.playersData[i].game[this.games[j]].success;
@@ -101,13 +137,65 @@ export const RankBoardAlpineData = { dataKey, data : () => ({
         },
         playersData: [],
         pointSelected: true,
-        games : ["Chess", "Poker", "Memory", "Tetris"],
+        games : ["Chess", "Poker", "Memory", "Tetris", "Sudoku", "Minesweeper"],
+        numberOfGames: 0,
+        selectedGame: 'all',
+        numberOfGamesPerPage: 4,
+        currentGamesPages: 0,
+        numberOfPlayersPerPage: 10,
+        currentPlayersPages: 0,
+        maxPlayersPages: 3,
+
 
         getPlayerData(index) {
-            return this.playersData[index];
+            let data = this.getPlayerPages();
+            return data[index];
         },
         getGames() {
-            return this.games;
+            let pages = Math.ceil(this.games.length / this.numberOfGamesPerPage);
+            let start = this.currentGamesPages * this.numberOfGamesPerPage;
+            let end = start + this.numberOfGamesPerPage;
+            if (end > this.games.length) {
+                let diff = end - this.games.length;
+
+                return this.games.slice(start, this.games.length).concat(this.games.slice(0, diff));
+            }
+            return this.games.slice(start, end);
+        },
+        getNumberPlayerPages() {
+            return this.maxPlayersPages;
+        },
+        getToPlayerPages(index) {
+            return this.currentPlayersPages = index-1;
+        },
+        getPlayerPages() {
+            let pages = Math.ceil(this.playersData.length / this.numberOfPlayersPerPage);
+            let start = this.currentPlayersPages * this.numberOfPlayersPerPage;
+            let end = start + this.numberOfPlayersPerPage;
+            let output = this.playersData.slice(start, end);
+            for (let i = 0; i < output.length; i++) {
+                output[i].position = start + i + 1;
+            }
+            return output;
+        },
+        getNumberOfGames() {
+            return this.games.length + 1;
+        },
+        showMoreGames() {
+            this.currentGamesPages = (this.currentGamesPages + 1) % (Math.ceil(this.games.length / this.numberOfGamesPerPage));
+            this.selectedGame = 'all';
+        },
+        showNextPlayersPage() {
+            if (this.currentPlayersPages === Math.ceil(this.playersData.length / this.numberOfPlayersPerPage) - 1) {
+                return;
+            }
+            this.currentPlayersPages++;
+        },
+        showPastPlayersPage() {
+            if (this.currentPlayersPages === 0) {
+                return;
+            }
+            this.currentPlayersPages--;
         },
         sortByPoints() {
             this.playersData.sort((a, b) => b.score - a.score);
@@ -118,8 +206,8 @@ export const RankBoardAlpineData = { dataKey, data : () => ({
             this.pointSelected = false;
         },
         keepGame(game) {
-            console.log(game);
-            if (game === 'all') {
+            this.selectedGame = game;
+            if (this.selectedGame === 'all') {
                 for (let i = 0; i < this.playersData.length; i++) {
                     this.playersData[i].score = 0;
                     this.playersData[i].success = 0;
@@ -131,8 +219,8 @@ export const RankBoardAlpineData = { dataKey, data : () => ({
             }
             else {
                 for (let i = 0; i < this.playersData.length; i++) {
-                    this.playersData[i].score = this.playersData[i].game[game].score;
-                    this.playersData[i].success = this.playersData[i].game[game].success;
+                    this.playersData[i].score = this.playersData[i].game[this.selectedGame].score;
+                    this.playersData[i].success = this.playersData[i].game[this.selectedGame].success;
                 }
             }
             if (this.pointSelected) {
