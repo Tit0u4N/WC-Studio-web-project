@@ -1,6 +1,7 @@
 export const Memory = `
-<div>
-        <h1>MEMORY</h1>
+<div id="memoryGameContainer">
+    <h1>Memory</h1>
+    <div class="memory-grid"></div>
 </div>
 `
 
