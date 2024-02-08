@@ -20,7 +20,11 @@ export const Memory = `
         <div><h3 class="mb-1">Timer</h3><p class="text-center" id="memory-timer">0</p></div>
         <div><h3 class="mb-1">Pairs</h3><p class="text-center" id="memory-pairs">0</p></div>
     </div>
-    <div class="memory-grid"></div>
+    
+    <div class="hidden">
+    
+    </div>
+    <div class="memory-grid hidden"></div>
 </div>
 `
 

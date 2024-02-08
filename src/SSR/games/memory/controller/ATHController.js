@@ -26,7 +26,11 @@ export class ATHController {
 
     reset() {
         clearInterval(this.timer);
-        this.ATHModel.return()
+        this.ATHModel.reset()
+    }
+
+    stop() {
+        clearInterval(this.timer);
     }
 
     addMove() {

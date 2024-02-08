@@ -63,6 +63,18 @@ export class GridController {
             this.selectedCard = null;
         }
         this.canSelect = true;
+
+        if (this.checkEndCondition()) {
+            this.endGame();
+        }
+    }
+
+    checkEndCondition() {
+        return this.gridModel.isAllCardsFound();
+    }
+
+    endGame() {
+        this.athController.stop();
     }
 
 }
