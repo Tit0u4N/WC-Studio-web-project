@@ -9,7 +9,7 @@ export class GridModel {
 
     generateCards(numberOfPairs) {
         this.cards = [];
-        for (let i = 0; i < numberOfPairs; i++) {
+        for (let i = 1; i <= numberOfPairs; i++) {
             this.cards.push(new CardModel(i));
             this.cards.push(new CardModel(i));
         }
@@ -20,4 +20,5 @@ export class GridModel {
     shuffleCards() {
         this.cards = _.shuffle(this.cards);
     }
+
 }

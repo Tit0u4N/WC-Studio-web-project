@@ -6,5 +6,3 @@ import {MainMemoryView} from "./view/MainMemoryView.js";
 const MemoryModel = new MainMemoryModel();
 const MemoryController = new MainMemoryController(MemoryModel);
 const MemoryView = new MainMemoryView(MemoryModel, MemoryController);
-
-MemoryController.init();

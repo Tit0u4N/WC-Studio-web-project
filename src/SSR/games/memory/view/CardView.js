@@ -31,16 +31,13 @@ export class CardView {
 
     addEventListeners() {
         this.cardDOM.addEventListener('click', () => {
-            if (!this.isFlipped) {
-                this.gridController.selectCard(this);
-                this.isFlipped = true;
-            }
+            this.gridController.selectCard(this);
             console.log('card clicked')
         });
     }
 
     getImgURL() {
-        return `/assets/games/memory/cat-synthwave.webp`
+        return `/assets/games/memory/themes/default/card-${this.type}.webp`
     }
 
     toggleShowImg(show) {
@@ -64,7 +61,6 @@ export class CardView {
             this.cardDOM.classList.remove('selected');
             setTimeout(() => {
                 this.toggleShowImg(false);
-                this.isFlipped = false;
             }, CardView.flippedAnimDuration);
         }
         return CardView.flippedAnimDuration;

@@ -8,8 +8,8 @@ export class GridController {
         this.canSelect = true;
     }
 
-    init() {
-        this.gridModel.generateCards(8);
+    init(nbPairs = 8) {
+        this.gridModel.generateCards(nbPairs);
         this.gridView.init();
     }
 
