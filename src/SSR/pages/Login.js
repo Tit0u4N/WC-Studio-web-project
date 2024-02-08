@@ -9,7 +9,8 @@ const PageKey = 'login';
 export const Login =
 
 `
-<div style="overflow: hidden; height: 70vh">
+<!-- main div : height = 70vh (pour laisser 30vh pour le header et un peu d'espace) -->
+<div id="loginPageContainer">
     <div class="h-full">
     
         <!-- à enlever 
