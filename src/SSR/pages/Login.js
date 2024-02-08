@@ -35,10 +35,10 @@ export const Login = LayoutPage(PageKey,
     
           <div class="flex justify-center w-2/3 mx-auto">
               <div class="rounded-3xl div-under-login-button">
-                <button id="login-button" type="submit" class="flex w-full justify-center rounded-3xl bg-[#4F356E] py-2.5
+                <button id="login-button" type="submit" class="flex w-full justify-center rounded-3xl bg-[#3D225D] py-2.5
                                              text-2xl font-semibold leading-6 text-white shadow-xl hover:bg-purple-100
                                              focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 
-                                             focus-visible:outline-purple-200 hover:text-[#4F356E]"
+                                             focus-visible:outline-purple-200 hover"
                 >Sign in</button>
               </div>
           </div>

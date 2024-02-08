@@ -78,10 +78,10 @@ p, span,a {
 // Event
 
 .hover {
-  transition: background-color 0.5s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
 
   &:hover {
-    background-color: var(--Background-Hight-Plus);
+    background-color: var(--Background-Hight-Plus) !important;
   }
 }
 
