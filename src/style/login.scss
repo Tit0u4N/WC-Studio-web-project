@@ -1,58 +1,19 @@
-/*
-#password:focus{
-  outline: none !important;
-  border: none !important;
-}
-#password::placeholder{
-  font-style: italic;
-}
-
-#username::placeholder{
-  font-style: italic;
-}
-*/
-
 input::placeholder{
   font-style: italic;
   color: var(--Placeholder);
-  outline: none !important;
-  border: none !important;
 }
 
-#loginPageContainer{
-  height: 70vh;
-}
-
-/*
-
-#login-button{
-  // tailwind => bg-[#4F356E]
-  border: 4px;
-  border: var(--VGradient-blue-to-red);
-}
- */
-
-#div-under-login-button{
-  // background-color: white;
+.div-under-login-button {
   padding: 2px !important;
   background: var(--VGradient-red-to-blue);
   width: 100vh;
-}
 
-#div-under-login-button:hover{
-  background: var(--VGradient-blue-to-red) !important;
-}
+  &:hover {
+    background: var(--VGradient-blue-to-red) !important;
+  }
 
-#div-under-login-button:focus{
-  background: var(--VGradient-red-to-blue);
-}
-
-#login-button{
-  /*
-  max-height: 50px;
-  max-width: 400px;
-  */
-
-  //border-color: var(--VGradient-blue-to-red);
+  &:focus {
+    background: var(--VGradient-red-to-blue);
+  }
 }
 
