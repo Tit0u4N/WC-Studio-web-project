@@ -1,4 +1,5 @@
 import {GridController} from "./GridController.js";
+import {ATHController} from "./ATHController.js";
 
 export class MainMemoryController {
 
@@ -6,7 +7,8 @@ export class MainMemoryController {
         this.MainModel = MainModel;
         this.MainView = null;
 
-        this.gridController = new GridController(this.MainModel.getGridModel());
+        this.athController = new ATHController(this.MainModel.getATHModel());
+        this.gridController = new GridController(this.MainModel.getGridModel(), this.athController);
 
         this.gameMode = GameMode.EASY;
     }
@@ -14,14 +16,21 @@ export class MainMemoryController {
     setView(MainView) {
         this.MainView = MainView;
         this.gridController.setView(MainView.getGridView());
+        this.athController.setView(MainView.getATHView());
     }
 
     getGridController() {
         return this.gridController;
     }
 
+    getATHController() {
+        return this.athController;
+    }
+
     init() {
+        this.MainView.toggleShowControlPanel(false);
         this.gridController.init(GameMode[this.gameMode]);
+        this.athController.init();
     }
 
     setGameMode(mode) {

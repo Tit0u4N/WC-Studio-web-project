@@ -1,4 +1,5 @@
 import {GridView} from "./GridView.js";
+import {ATHView} from "./ATHView.js";
 
 export class MainMemoryView {
 
@@ -7,7 +8,9 @@ export class MainMemoryView {
         this.MainController = MainController;
 
         this.parentDOM = document.getElementById("memoryGameContainer");
+        this.controlPanelDOM = this.parentDOM.querySelector('#memory-control-panel');
 
+        this.ATHView = new ATHView(this.parentDOM, this.MainModel.getATHModel(), this.MainController.getATHController());
         this.gridView = new GridView(this.parentDOM, this.MainModel.getGridModel(), this.MainController.getGridController());
 
         this.MainController.setView(this);
@@ -19,24 +22,23 @@ export class MainMemoryView {
         return this.gridView;
     }
 
+    getATHView() {
+        return this.ATHView;
+    }
+
     addEventLister() {
         const select = this.parentDOM.querySelector('#memory-difficulty')
-        select.addEventListener('change', (e) => {
+        select.addEventListener('change', () => {
             this.MainController.setGameMode(select.value);
         });
 
         const startButton = this.parentDOM.querySelector('#memory-start');
-        startButton.addEventListener('click', (e) => {
+        startButton.addEventListener('click', () => {
             this.MainController.init();
         });
     }
 
-    hideControlPanel() {
-        this.parentDOM.querySelector('#memory-control-panel').classList.add('hidden');
+    toggleShowControlPanel(show) {
+        this.controlPanelDOM.classList.toggle('hidden', !show);
     }
-
-    showControlPanel() {
-        this.parentDOM.querySelector('#memory-control-panel').classList.remove('hidden');
-    }
-
 }

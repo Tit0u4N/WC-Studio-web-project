@@ -32,7 +32,6 @@ export class CardView {
     addEventListeners() {
         this.cardDOM.addEventListener('click', () => {
             this.gridController.selectCard(this);
-            console.log('card clicked')
         });
     }
 
