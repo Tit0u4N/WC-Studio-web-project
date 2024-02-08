@@ -20,11 +20,12 @@ export const Login =
     
       <div class="mx-auto w-full">
         <!-- <img class="mx-auto h-20 w-auto" src="../../../public/assets/images/Logo-WC-Studio.png" alt="WC Studios"> -->
-        <h2 class="mt-10 text-center text-7xl font-bold leading-9 tracking-tight text-white">SIGN IN TO YOUR ACCOUNT</h2>
+        <h2 class="mt-10 text-center text-6xl font-bold leading-9 tracking-tight text-white">SIGN IN TO YOUR ACCOUNT</h2>
       </div>
     
       <div class="mt-10 mx-auto w-1/3">
-        <form class="space-y-6" action="#" method="POST">
+        <form class="space-y-10" action="#" method="POST">
+          <!-- div form username -->
           <div>
             <label for="username" class="block text-xl font-medium leading-6 text-white">Username : </label>
             <div class="mt-2">
@@ -35,6 +36,7 @@ export const Login =
             </div>
           </div>
     
+          <!-- div form password + forgot password link -->
           <div>
             <div class="flex items-center justify-between">
               <label for="password" class="block text-xl font-medium leading-6 text-white">Password : </label>
