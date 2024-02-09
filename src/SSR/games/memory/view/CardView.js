@@ -18,7 +18,6 @@ export class CardView {
     createCard() {
         const div = document.createElement('div');
         div.classList.add('memory--card');
-        div.dataset.type = this.type;
         div.classList.add(this.getFlippedClass());
         const frontCard = document.createElement('div');
         frontCard.classList.add('front');

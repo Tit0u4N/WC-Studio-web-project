@@ -9,6 +9,7 @@ export class MainMemoryView {
 
         this.parentDOM = document.getElementById("memoryGameContainer");
         this.controlPanelDOM = this.parentDOM.querySelector('#memory-control-panel');
+        this.endGameDOM = this.parentDOM.querySelector('#memory-end-game');
 
         this.ATHView = new ATHView(this.parentDOM, this.MainModel.getATHModel(), this.MainController.getATHController());
         this.gridView = new GridView(this.parentDOM, this.MainModel.getGridModel(), this.MainController.getGridController());
@@ -36,9 +37,19 @@ export class MainMemoryView {
         startButton.addEventListener('click', () => {
             this.MainController.init();
         });
+
+        const newGameButton = this.parentDOM.querySelector('#memory-new-game');
+        newGameButton.addEventListener('click', () => {
+            this.toggleShowEndGame(false);
+            this.toggleShowControlPanel(true);
+        });
     }
 
     toggleShowControlPanel(show) {
         this.controlPanelDOM.classList.toggle('hidden', !show);
+    }
+
+    toggleShowEndGame(show) {
+        this.endGameDOM.classList.toggle('hidden', !show);
     }
 }

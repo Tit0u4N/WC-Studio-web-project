@@ -8,10 +8,12 @@ export class GridView {
     }
 
     init() {
-       this.createCards()
+        this.createCards()
+        this.toggleShow(true);
     }
 
     createCards() {
+        this.reset();
         const cardsDOM = [];
         this.gridModel.cards.forEach(card => {
             const cardDOM = new CardView(card, this.gridController);
@@ -20,5 +22,13 @@ export class GridView {
         })
 
         return cardsDOM;
+    }
+
+    toggleShow(show) {
+        this.gridDOM.classList.toggle('hidden', !show);
+    }
+
+    reset() {
+        this.gridDOM.innerHTML = '';
     }
 }

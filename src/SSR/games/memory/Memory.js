@@ -21,8 +21,10 @@ export const Memory = `
         <div><h3 class="mb-1">Pairs</h3><p class="text-center" id="memory-pairs">0</p></div>
     </div>
     
-    <div class="hidden">
+    <div id="memory-end-game" class="hidden h-1/3 flex flex-col justify-center items-center gap-3 mt-4">
+        <h1 class="text-center">Victory</h1>
     
+        <button id="memory-new-game" class="button-hover p-2 mt-4">New Game</button>
     </div>
     <div class="memory-grid hidden"></div>
 </div>

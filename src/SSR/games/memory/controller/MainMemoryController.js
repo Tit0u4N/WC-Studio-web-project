@@ -8,7 +8,7 @@ export class MainMemoryController {
         this.MainView = null;
 
         this.athController = new ATHController(this.MainModel.getATHModel());
-        this.gridController = new GridController(this.MainModel.getGridModel(), this.athController);
+        this.gridController = new GridController(this.MainModel.getGridModel(), this.athController, this);
 
         this.gameMode = GameMode.EASY;
     }
@@ -37,6 +37,10 @@ export class MainMemoryController {
         if (mode in GameMode) {
             this.gameMode = mode;
         }
+    }
+
+    endGame() {
+        this.MainView.toggleShowEndGame(true);
     }
 
 }

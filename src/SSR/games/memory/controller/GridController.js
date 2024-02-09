@@ -1,8 +1,9 @@
 export class GridController {
 
-    constructor(gridModel, athController) {
+    constructor(gridModel, athController, mainController) {
         this.gridModel = gridModel;
         this.athController = athController;
+        this.mainController = mainController;
         this.gridView = null;
 
         this.selectedCard = null;
@@ -75,6 +76,8 @@ export class GridController {
 
     endGame() {
         this.athController.stop();
+        this.gridView.toggleShow(false);
+        this.mainController.endGame();
     }
 
 }
