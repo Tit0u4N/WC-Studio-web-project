@@ -3,23 +3,20 @@ export const Success = (name, gamename, completion, image) => {
     return `
 
     <div>
-        <!-- 
-        <p> success component here !</p>
-        -->
-        
         <!-- div de fond --> 
-        <div class="bg-[#4F356E] flex flex-col justify-center items-center overflow-visible rounded-lg" style="width: 120px; height: 80px;">
+        <div id="successBackground" 
+             class="bg-[#4F356E] flex flex-col justify-center items-center overflow-visible rounded-lg">
         
-            <!-- div pour l'image + son contour --> <!-- div de contour (%tage succès) -->
-            <div class="h-full w-2/3 rounded-full border-4 border-[#FF16CD]" style="margin-top : -45%;">
+            <!-- div pour l'image + son contour (%tage succès) -->
+            <div id="sImageContainer" class="h-full w-2/3 rounded-full border-4 border-[#FF16CD]">
                 <!-- image du succès -->
                 <img src="../../../public/assets/images/User.png" alt="succes-icon" class="mx-auto p-2">
             </div>
             
             <!-- div text --> 
             <div class="flex flex-col justify-evenly items-center h-2/3">
-                <p class="font-light text-slate-50" style="font-size: small;">${name}</p>
-                <p class="font-thin" style="font-size: x-small;">${gamename}</p>
+                <p id="successNameText" class="font-light text-slate-50">${name}</p>
+                <p id="sGameNameText" class="font-thin">${gamename}</p>
             </div>
             
         </div>
