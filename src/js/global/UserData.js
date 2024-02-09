@@ -49,7 +49,7 @@ export class UserData{
 
     // Info
 
-    getUserName() {
+    getUsername() {
         return this.info.username;
     }
 
@@ -108,7 +108,9 @@ export class UserData{
     }
 
     // Ranking
-    //TODO Définir le format des données de ranking
+    getRanking() {
+        return this.ranking;
+    }
 
     // Achievements
     //TODO Définir le format des données de achievements

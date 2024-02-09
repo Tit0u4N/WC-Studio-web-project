@@ -4,16 +4,16 @@ const playerRow = (index) => {
     return `
         <div class="flex ">
             <div class=" border-r-2 border-t-2 px-4 py-2 w-2/12">
-                <span x-text="getPlayerData(${index}).position" class="text-center "></span>
+                <span x-text="getPlayerData(${index})?.position" class="text-center "></span>
             </div>
             <div class="border-r-2 border-t-2 px-4 py-2 w-6/12">
-                <span x-text="getPlayerData(${index}).name" class="  text-center  "></span>
+                <span x-text="getPlayerData(${index})?.name" class="  text-center  "></span>
             </div>
             <div class="border-r-2 border-t-2 px-4 py-2 w-4/12">
-                <span x-text="getPlayerData(${index}).score" class=" text-center"></span>
+                <span x-text="getPlayerData(${index})?.score" class=" text-center"></span>
             </div>
             <div class=" border-t-2 px-4 py-2 w-4/12">
-                <span x-text="getPlayerData(${index}).success" class=" text-center"></span>
+                <span x-text="getPlayerData(${index})?.success" class=" text-center"></span>
             </div>
         </div>
     `;
@@ -108,15 +108,38 @@ export const RankBoard = `
                 ${renderPlayerTable()}
             </div>
             ${renderPlayerPagesNavigation()}
-
-
     </div>
 `;
 
 
 export const RankBoardAlpineData = { dataKey, data : () => ({
+        initUserData() {
+            const userRanking = this.$store.user.data.getRanking();
+            let score = 0;
+            let success = 0;
+            const tempRanking = [];
+            this.games.forEach(game => {
+                if (userRanking[game]) {
+                    tempRanking.push(game);
+                    score += userRanking[game].score;
+                    success += userRanking[game].success;
+                } else {
+                    tempRanking.push(game);
+                    userRanking[game] = {
+                        score: 0,
+                        success: 0
+                    }
+                }
+            })
+            this.playersData.push({
+                name: this.$store.user.data.getUsername(),
+                score,
+                success,
+                game: userRanking
+            })
+        },
         initPlayersData() {
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 25; i++) {
                 this.playersData.push({
                     name: `Player${i}`,
                     score : 0,
@@ -131,8 +154,8 @@ export const RankBoardAlpineData = { dataKey, data : () => ({
                     this.playersData[i].score += this.playersData[i].game[this.games[j]].score;
                     this.playersData[i].success += this.playersData[i].game[this.games[j]].success;
                 }
-
             }
+            this.initUserData();
             this.sortByPoints();
         },
         playersData: [],
