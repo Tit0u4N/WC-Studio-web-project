@@ -42,6 +42,7 @@ export class MainMemoryView {
         newGameButton.addEventListener('click', () => {
             this.toggleShowEndGame(false);
             this.toggleShowControlPanel(true);
+            this.ATHView.toggleShow(false)
         });
     }
 

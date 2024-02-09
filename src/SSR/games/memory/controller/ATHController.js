@@ -17,6 +17,7 @@ export class ATHController {
     }
 
     init() {
+        this.reset()
         this.ATHView.toggleShow(true);
         this.ATHView.updateTimer();
         this.ATHView.updateMoves();
@@ -25,7 +26,7 @@ export class ATHController {
     }
 
     reset() {
-        clearInterval(this.timer);
+        if (this.timer) clearInterval(this.timer);
         this.ATHModel.reset()
     }
 
