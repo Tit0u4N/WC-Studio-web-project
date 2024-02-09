@@ -3,9 +3,9 @@ export const KEY_USERDATA_LOCALSTORAGE = "userData-WC-Studio"
 
 const USERDATA_DEFAULT = {
     info: {
-        name: null,
-        email: null,
+        username: null,
         password: null,
+        money: 0,
     },
     settings : {
         musicEnable: true,
@@ -49,25 +49,20 @@ export class UserData{
 
     // Info
 
-    getName() {
-        return this.info.name.clone();
-    }
-
-    getEmail() {
-        return this.info.email.clone();
+    getUsername() {
+        return this.info.username;
     }
 
     getPassword() {
-        return this.info.password.clone();
+        return this.info.password;
     }
 
-    setName(name) {
-        this.info.name = name;
-        this.save();
+    getMoney() {
+        return this.info.money;
     }
 
-    setEmail(email) {
-        this.info.email = email;
+    setUsername(username) {
+        this.info.username = username;
         this.save();
     }
 
@@ -76,14 +71,30 @@ export class UserData{
         this.save()
     }
 
+    setMoney(money) {
+        this.info.money = money;
+        this.save()
+    }
+
+    addMoney(money) {
+        this.setMoney(this.info.money + money);
+    }
+
+    removeMoney(money) {
+        if (this.info.money - money < 0) {
+            this.setMoney(0);
+        }
+        this.setMoney(this.info.money - money);
+    }
+
     // Settings
 
     getMusicEnable() {
-        this.settings.musicEnable.clone();
+        return this.settings.musicEnable;
     }
 
     getSoundEnable() {
-        this.settings.soundEnable.clone();
+        return this.settings.soundEnable;
     }
 
     setMusicEnable(musicEnable) {
@@ -97,7 +108,9 @@ export class UserData{
     }
 
     // Ranking
-    //TODO Définir le format des données de ranking
+    getRanking() {
+        return this.ranking;
+    }
 
     // Achievements
     //TODO Définir le format des données de achievements
@@ -107,5 +120,9 @@ export class UserData{
 
     save() {
         localStorage.setItem(KEY_USERDATA_LOCALSTORAGE, JSON.stringify(this.userDataJson));
+    }
+
+    reset() {
+        localStorage.removeItem(KEY_USERDATA_LOCALSTORAGE);
     }
 }

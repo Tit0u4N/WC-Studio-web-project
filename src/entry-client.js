@@ -2,6 +2,8 @@ import './style/style.scss'
 import Alpine from 'alpinejs'
 import {AccountAlpineData} from "./SSR/pages/Account.js";
 import {RankBoardAlpineData} from "./SSR/components/RankBoard.js";
+import {LoginAlpineData} from "./SSR/pages/Login.js";
+import {UserData} from "./js/global/UserData.js";
 
 const getPageByURL = () => {
     const path = window.location.pathname.replace('/', '');
@@ -17,6 +19,22 @@ const getPageByURL = () => {
     }
 };
 
+
+Alpine.store('user', {
+    data: UserData.getExistingUserData(),
+    update() {
+        this.user = UserData.getExistingUserData();
+    },
+    isConnected() {
+        this.update();
+        return !this.user.isNewUserData();
+    },
+    getMoney() {
+        this.update();
+        return this.user.getMoney();
+    }
+});
+
 Alpine.store('pages', {
     showing: getPageByURL(),
     isShowing(page) {
@@ -28,12 +46,17 @@ Alpine.store('pages', {
     },
 });
 
+Alpine.data(LoginAlpineData.dataKey, LoginAlpineData.data);
 Alpine.data(AccountAlpineData.dataKey, AccountAlpineData.data);
 Alpine.data(RankBoardAlpineData.dataKey, RankBoardAlpineData.data);
 
 window.addEventListener('alpine:init', () => {
+    if (UserData.getExistingUserData().isNewUserData()) {
+        Alpine.store('pages').set('login');
+    }
+
     setTimeout(() => {
-        document.getElementById("pageLoader").classList.add("!hidden")
+        document.getElementById("pageLoader").classList.toggle("!hidden", true);
     }, 1000);
 });
 
