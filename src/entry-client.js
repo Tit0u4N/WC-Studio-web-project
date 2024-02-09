@@ -4,6 +4,7 @@ import {AccountAlpineData} from "./SSR/pages/Account.js";
 import {RankBoardAlpineData} from "./SSR/components/RankBoard.js";
 import {LoginAlpineData} from "./SSR/pages/Login.js";
 import {UserData} from "./js/global/UserData.js";
+import {AlpineSuccessData} from "./SSR/components/Success.js";
 
 const getPageByURL = () => {
     const path = window.location.pathname.replace('/', '');
@@ -50,6 +51,8 @@ Alpine.data(LoginAlpineData.dataKey, LoginAlpineData.data);
 Alpine.data(AccountAlpineData.dataKey, AccountAlpineData.data);
 Alpine.data(RankBoardAlpineData.dataKey, RankBoardAlpineData.data);
 
+
+Alpine.data(AlpineSuccessData.dataKey, AlpineSuccessData.data);
 window.addEventListener('alpine:init', () => {
     if (UserData.getExistingUserData().isNewUserData()) {
         Alpine.store('pages').set('login');
