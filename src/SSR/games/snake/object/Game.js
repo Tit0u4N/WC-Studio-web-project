@@ -65,7 +65,10 @@ export default class Game {
     resetGame() {
 
 
-
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.score = 0;
+        this.updateScore();
+        this.ctx.globalAlpha = 1;
         this.snake = new Snake(this.ctx, this.canvas, this.boxSize);
         this.food = new Food(this.canvas, this.snake, this.boxSize, this.ctx);
         this.walls = [];
