@@ -34,7 +34,7 @@ export default class WallGenerator {
             y+1 >= this.canvas.height / this.boxSize)
     }
 
-    getGoodCoord() {
+    getGoodCoordinate() {
         let x = Math.floor(Math.random() * (this.canvas.width / this.boxSize));
         let y = Math.floor(Math.random() * (this.canvas.height / this.boxSize));
 
@@ -50,8 +50,8 @@ export default class WallGenerator {
         if (this.canBeThere(x, y)) {
             this.walls.push(new Wall(this.canvas, this.boxSize, this.ctx, x, y));
         }else {
-            let coord = this.getGoodCoord();
-            this.addWall(coord.x, coord.y);
+            let coordinate = this.getGoodCoordinate();
+            this.addWall(coordinate.x, coordinate.y);
         }
     }
 
@@ -59,7 +59,7 @@ export default class WallGenerator {
         // We can create either a square, a line, or a cross with the specified size (number of walls)
         let shapes = ["squares", "lines", "cross"];
         let shape = shapes[Math.floor(Math.random() * shapes.length)];
-        let center = this.getGoodCoord();
+        let center = this.getGoodCoordinate();
 
         switch (shape) {
             case "squares":

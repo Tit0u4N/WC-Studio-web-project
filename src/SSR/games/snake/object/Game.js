@@ -11,11 +11,11 @@ export default class Game {
         this.score = 0;
         this.gameMode = "";
         this.walls = [];
-        this.snake = new Snake(this.ctx,this.canvas,this.boxSize);
+        this.snake = new Snake(this.ctx, this.canvas, this.boxSize);
 
         this.food = new Food(this.canvas, this.snake, this.boxSize, ctx);
         this.changingDirection = false;
-        this.etatJeu = "menuPrincipal";
+        this.etatJeu = "mainMenu";
         this.gameInterval = null;
         this.wallGenerator = new WallGenerator(this.canvas, this.boxSize, this.snake, this.food, this.ctx, this.walls);
     }
@@ -40,7 +40,6 @@ export default class Game {
 
         }
     }
-
 
 
     update() {
@@ -114,7 +113,7 @@ export default class Game {
 
     changeGameMode(mode) {
         this.gameMode = mode;
-        this.etatJeu = "jeuEnCours";
+        this.etatJeu = "gameInProgress";
         this.startGame();
     }
 
@@ -125,7 +124,7 @@ export default class Game {
         this.updateScore();
         this.resetGame();
         this.gameMode = "";
-        this.etatJeu = "menuPrincipal";
+        this.etatJeu = "mainMenu";
         this.gameInterval = setInterval(this.startGame.bind(this), 100);
     }
 
@@ -192,10 +191,10 @@ export default class Game {
     startGame() {
 
         switch (this.etatJeu) {
-            case "menuPrincipal":
+            case "mainMenu":
                 this.drawMenu();
                 break;
-            case "jeuEnCours":
+            case "gameInProgress":
                 clearInterval(this.gameInterval);
 
                 this.gameInterval = setInterval(this.update.bind(this), 100);
