@@ -9,7 +9,6 @@ export class Wall {
     }
 
     draw() {
-        console.log("dans la fonction draw du mur")
         this.ctx.fillStyle = this.color;
         this.ctx.fillRect(this.x * this.boxSize, this.y * this.boxSize, this.boxSize, this.boxSize);
     }
@@ -29,10 +28,10 @@ export default class WallGenerator {
         return !(this.snake.segments.some(segment => segment.x === x && segment.y === y) ||
             x === this.food.position.x && y === this.food.position.y ||
             this.walls.some(wall => wall.x === x && wall.y === y) ||
-            x < 0 ||
-            x  >= this.canvas.width / this.boxSize ||
-            y < 0 ||
-            y >= this.canvas.height / this.boxSize)
+            x-1 < 0 ||
+            x+1 >= this.canvas.width / this.boxSize ||
+            y-1 < 0 ||
+            y+1 >= this.canvas.height / this.boxSize)
     }
 
     getGoodCoord() {
@@ -49,7 +48,6 @@ export default class WallGenerator {
     addWall(x, y) {
         // Add wall only if coordinates are valid
         if (this.canBeThere(x, y)) {
-            console.log("on ajoute un mur en x: " + x + " et y: " + y);
             this.walls.push(new Wall(this.canvas, this.boxSize, this.ctx, x, y));
         }else {
             let coord = this.getGoodCoord();

@@ -101,11 +101,7 @@ export default class Game {
                 case "r":
                     this.resetGame();
                     break;
-                case "c":
-                    this.etatJeu = "jeuEnCours";
-                    this.changeGameMode("shadow");
-                    this.resetGame();
-                    break;
+
                 default:
                     console.log(event.key);
             }
