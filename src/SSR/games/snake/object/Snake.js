@@ -19,9 +19,8 @@ export default class Snake {
         try {
             // Charger le JSON des couleurs depuis un fichier externe
             const response = await fetch(`assets/skin/snake.json`);
-            console.log(response);
             const colorsJson = await response.json();
-            console.log(colorsJson);
+
 
             // Vérifier si le skin spécifié existe dans le JSON, sinon utiliser le skin par défaut
             const selectedColors = colorsJson[this.skin] || colorsJson["default"];
