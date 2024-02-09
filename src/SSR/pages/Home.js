@@ -11,11 +11,10 @@ export const Home =
             <h1>HOME</h1>
         </div> 
         
-        <!-- success component --> 
-        <!-- <div class="flex flex-col justify-center items-center"> -->
-            <!-- <h2> SUCCESS </h2> -->
-        <div> ${Success("success name", "game name", "69%", "miage")}</div>
-        <!-- </div> -->
+        <!-- successes list -->
+        <div>
+            <div> ${Success("success name", "game name", "69%", "miage")}</div>
+        </div>
         
     </div>
     `
