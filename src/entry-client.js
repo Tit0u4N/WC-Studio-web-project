@@ -58,7 +58,7 @@ window.addEventListener('alpine:init', () => {
     }
 
     setTimeout(() => {
-        document.getElementById("pageLoader").classList.add("!hidden")
+        document.getElementById("pageLoader").classList.toggle("!hidden", true);
     }, 1000);
 });
 
