@@ -1,6 +1,7 @@
 import './style/style.scss'
 import Alpine from 'alpinejs'
 import {AccountAlpineData} from "./SSR/pages/Account.js";
+import {AlpineSuccessData} from "./SSR/components/Success.js";
 
 const getPageByURL = () => {
     const path = window.location.pathname.replace('/', '');
@@ -29,6 +30,8 @@ Alpine.store('pages', {
 
 Alpine.data(AccountAlpineData.dataKey, AccountAlpineData.data);
 
+
+Alpine.data(AlpineSuccessData.dataKey, AlpineSuccessData.data);
 window.addEventListener('alpine:init', () => {
     setTimeout(() => {
         document.getElementById("pageLoader").classList.add("!hidden")
