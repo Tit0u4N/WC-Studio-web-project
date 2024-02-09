@@ -1,6 +1,7 @@
 import './style/style.scss'
 import Alpine from 'alpinejs'
 import {AccountAlpineData} from "./SSR/pages/Account.js";
+import {RankBoardAlpineData} from "./SSR/components/RankBoard.js";
 import {LoginAlpineData} from "./SSR/pages/Login.js";
 import {UserData} from "./js/global/UserData.js";
 
@@ -40,10 +41,6 @@ Alpine.store('pages', {
         return this.showing === page;
     },
     set(page) {
-        Alpine.store('user').update();
-        if (UserData.getExistingUserData().isNewUserData() && (page === 'account' || page === 'shop')) {
-            return this.showing = 'login';
-        }
         if (this.showing === page) return;
         this.showing = page;
     },
@@ -51,6 +48,8 @@ Alpine.store('pages', {
 
 Alpine.data(LoginAlpineData.dataKey, LoginAlpineData.data);
 Alpine.data(AccountAlpineData.dataKey, AccountAlpineData.data);
+Alpine.data(RankBoardAlpineData.dataKey, RankBoardAlpineData.data);
+
 window.addEventListener('alpine:init', () => {
     if (UserData.getExistingUserData().isNewUserData()) {
         Alpine.store('pages').set('login');
