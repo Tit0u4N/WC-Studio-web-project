@@ -58,7 +58,6 @@ export class UserData{
     }
 
     getMoney() {
-        console.log(this.info)
         return this.info.money;
     }
 

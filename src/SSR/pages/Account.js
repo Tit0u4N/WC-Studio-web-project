@@ -39,13 +39,6 @@ export const AccountAlpineData = {
     data : () => ({
         showing: 'inventory',
         user : UserData.getExistingUserData(),
-        update() {
-            this.user = UserData.getExistingUserData()
-        },
-        isConnected() {
-            this.update()
-            return !this.user.isNewUserData()
-        },
         isShowing(subpage) {
             return this.showing === subpage;
         },

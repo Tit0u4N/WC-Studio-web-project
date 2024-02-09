@@ -3,6 +3,7 @@ import Alpine from 'alpinejs'
 import {AccountAlpineData} from "./SSR/pages/Account.js";
 import {LoginAlpineData} from "./SSR/pages/Login.js";
 import {UserData} from "./js/global/UserData.js";
+import {store} from "alpinejs/src/store.js";
 
 const getPageByURL = () => {
     const path = window.location.pathname.replace('/', '');
@@ -18,8 +19,21 @@ const getPageByURL = () => {
     }
 };
 
-Alpine.data(LoginAlpineData.dataKey, LoginAlpineData.data);
-Alpine.data(AccountAlpineData.dataKey, AccountAlpineData.data);
+
+Alpine.store('user', {
+    data: UserData.getExistingUserData(),
+    update() {
+        this.user = UserData.getExistingUserData();
+    },
+    isConnected() {
+        this.update();
+        return !this.user.isNewUserData();
+    },
+    getMoney() {
+        this.update();
+        return this.user.getMoney();
+    }
+});
 
 Alpine.store('pages', {
     showing: getPageByURL(),
@@ -27,6 +41,7 @@ Alpine.store('pages', {
         return this.showing === page;
     },
     set(page) {
+        Alpine.store('user').update();
         if (UserData.getExistingUserData().isNewUserData() && (page === 'account' || page === 'shop')) {
             return this.showing = 'login';
         }
@@ -35,6 +50,8 @@ Alpine.store('pages', {
     },
 });
 
+Alpine.data(LoginAlpineData.dataKey, LoginAlpineData.data);
+Alpine.data(AccountAlpineData.dataKey, AccountAlpineData.data);
 window.addEventListener('alpine:init', () => {
     if (UserData.getExistingUserData().isNewUserData()) {
         Alpine.store('pages').set('login');

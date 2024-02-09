@@ -60,10 +60,10 @@ export const LoginAlpineData = {
                 user.setUsername(this.username)
                 user.setPassword(this.password)
                 user.save()
-                window.location.href = '/home'
+                // window.location.href = '/home'
             }
 
-            $store.pages.set('home')
+            this.$store.pages.set('home')
         }
     })
 }
