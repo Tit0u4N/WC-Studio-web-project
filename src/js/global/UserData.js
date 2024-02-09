@@ -13,7 +13,7 @@ const USERDATA_DEFAULT = {
     },
     ranking: [
     ],
-    achievements: [
+    success: [
     ],
     items: [
     ]
@@ -40,7 +40,7 @@ export class UserData{
         this.info = this.userDataJson.info;
         this.settings = this.userDataJson.settings;
         this.ranking = this.userDataJson.ranking;
-        this.achievements = this.userDataJson.achievements;
+        this.success = this.userDataJson.success;
     }
 
     isNewUserData() {
@@ -112,9 +112,10 @@ export class UserData{
         return this.ranking;
     }
 
-    // Achievements
-    //TODO Définir le format des données de achievements
-
+    // Success
+    getSuccess() {
+        return this.success;
+    }
     // Items
     //TODO Définir le format des données d'items
 
