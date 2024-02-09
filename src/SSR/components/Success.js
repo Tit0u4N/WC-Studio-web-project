@@ -49,8 +49,7 @@ export const AlpineSuccessData = {
     dataKey: alpinDataKey,
     data: () => ({
         isUnlocked(id) {
-            // todo bind avec le store USER
-            return true
+            return this.$store.user.data.getSuccess().includes(id)
         }
     })
 }
