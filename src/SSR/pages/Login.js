@@ -57,12 +57,13 @@ export const LoginAlpineData = {
             const user = UserData.getExistingUserData();
 
             if (user.isNewUserData()) {
-                user.setEmail(this.username)
+                user.setUsername(this.username)
                 user.setPassword(this.password)
                 user.save()
+                window.location.href = '/home'
             }
 
-            this.$store.pages.set('home')
+            $store.pages.set('home')
         }
     })
 }

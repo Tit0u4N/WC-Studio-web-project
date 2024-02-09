@@ -18,6 +18,9 @@ const getPageByURL = () => {
     }
 };
 
+Alpine.data(LoginAlpineData.dataKey, LoginAlpineData.data);
+Alpine.data(AccountAlpineData.dataKey, AccountAlpineData.data);
+
 Alpine.store('pages', {
     showing: getPageByURL(),
     isShowing(page) {
@@ -32,13 +35,11 @@ Alpine.store('pages', {
     },
 });
 
-Alpine.data(LoginAlpineData.dataKey, LoginAlpineData.data);
-Alpine.data(AccountAlpineData.dataKey, AccountAlpineData.data);
-
 window.addEventListener('alpine:init', () => {
     if (UserData.getExistingUserData().isNewUserData()) {
         Alpine.store('pages').set('login');
     }
+
     setTimeout(() => {
         document.getElementById("pageLoader").classList.add("!hidden")
     }, 1000);

@@ -8,10 +8,10 @@ export const Header = `
                 <h1 class="text-center mt-3">WC STUDIO</h1>
             </div> 
             <div class="basis-1/4 flex justify-end gap-3 ">
-                <div class="relative">
+                <div class="relative" x-data="account"  x-show="isConnected()">
                     <a x-on:click="$store.pages.set('shop')" class="cursor-pointer"><img src="/assets/images/Shop.png" alt="SHOP" class="hover:invert"></a>
                     <div class="money h-0">
-                        <span class="font-bold relative " id="money">1000</span>
+                        <span x-text="user.getMoney()" class="font-bold relative " id="money">xxxx</span>
                         <img class="relative " src="/assets/images/Money.png" alt="Logo money"></a>
                     </div>
                 </div>
