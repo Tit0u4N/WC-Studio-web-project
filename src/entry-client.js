@@ -3,7 +3,6 @@ import Alpine from 'alpinejs'
 import {AccountAlpineData} from "./SSR/pages/Account.js";
 import {LoginAlpineData} from "./SSR/pages/Login.js";
 import {UserData} from "./js/global/UserData.js";
-import {store} from "alpinejs/src/store.js";
 
 const getPageByURL = () => {
     const path = window.location.pathname.replace('/', '');
