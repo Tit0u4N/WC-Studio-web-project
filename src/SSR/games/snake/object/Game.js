@@ -8,7 +8,7 @@ export default class Game {
         this.canvas = canvas;
         this.ctx = ctx;
         this.boxSize = this.canvas.width / 30;
-        this.score = 39;
+        this.score = 0;
         this.gameMode = "";
         this.walls = [];
         this.snake = new Snake(this.ctx,this.canvas,this.boxSize);
@@ -26,7 +26,6 @@ export default class Game {
         this.food.draw(this.ctx, this.boxSize);
 
         this.walls.forEach(wall => {
-            console.log(wall);
             wall.draw();
         });
     }
@@ -35,7 +34,7 @@ export default class Game {
         document.getElementById("currentScore").innerText = this.score;
         if (this.gameMode === "walls") {
             if (this.score % 5 === 0) {
-                let n = Math.floor(this.score / 5);
+                let n = this.score / 5;
                 this.wallGenerator.generateWallWithSize(n);
             }
 
@@ -64,10 +63,13 @@ export default class Game {
     }
 
     resetGame() {
-        let skins = ["Dark", "Grey", "Light"];
-        this.snake = new Snake(this.ctx, this.canvas, this.boxSize, skins[Math.floor(Math.random() * skins.length)]);
+
+
+
+        this.snake = new Snake(this.ctx, this.canvas, this.boxSize);
         this.food = new Food(this.canvas, this.snake, this.boxSize, this.ctx);
         this.walls = [];
+        this.wallGenerator = new WallGenerator(this.canvas, this.boxSize, this.snake, this.food, this.ctx, this.walls);
 
         document.getElementById("snakeCanvas").style.opacity = 1;
         this.draw();

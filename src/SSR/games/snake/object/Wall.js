@@ -29,10 +29,10 @@ export default class WallGenerator {
         return !(this.snake.segments.some(segment => segment.x === x && segment.y === y) ||
             x === this.food.position.x && y === this.food.position.y ||
             this.walls.some(wall => wall.x === x && wall.y === y) ||
-            x <= 0 ||
-            x + 1 >= this.canvas.width / this.boxSize ||
-            y <= 0 ||
-            y + 1 >= this.canvas.height / this.boxSize)
+            x < 0 ||
+            x  >= this.canvas.width / this.boxSize ||
+            y < 0 ||
+            y >= this.canvas.height / this.boxSize)
     }
 
     getGoodCoord() {
@@ -49,7 +49,11 @@ export default class WallGenerator {
     addWall(x, y) {
         // Add wall only if coordinates are valid
         if (this.canBeThere(x, y)) {
+            console.log("on ajoute un mur en x: " + x + " et y: " + y);
             this.walls.push(new Wall(this.canvas, this.boxSize, this.ctx, x, y));
+        }else {
+            let coord = this.getGoodCoord();
+            this.addWall(coord.x, coord.y);
         }
     }
 
@@ -57,26 +61,27 @@ export default class WallGenerator {
         // We can create either a square, a line, or a cross with the specified size (number of walls)
         let shapes = ["squares", "lines", "cross"];
         let shape = shapes[Math.floor(Math.random() * shapes.length)];
+        let center = this.getGoodCoord();
 
         switch (shape) {
             case "squares":
-                this.generateSquareWall(size);
+                this.generateSquareWall(size, center);
                 break;
             case "lines":
-                this.generateLineWall(size);
+                this.generateLineWall(size, center);
                 break;
             case "cross":
-                this.generateCrossWall(size);
+                this.generateCrossWall(size, center);
                 break;
             default:
                 console.error("Invalid shape specified");
         }
     }
 
-    generateSquareWall(size) {
-        let coord = this.getGoodCoord();
-        let x = coord.x;
-        let y = coord.y;
+    generateSquareWall(size,center) {
+
+        let x = center.x;
+        let y = center.y;
 
         // Add walls to form a square
         for (let i = 0; i < size; i++) {
@@ -86,10 +91,10 @@ export default class WallGenerator {
         }
     }
 
-    generateLineWall(size) {
-        let coord = this.getGoodCoord();
-        let x = coord.x;
-        let y = coord.y;
+    generateLineWall(size,center) {
+
+        let x = center.x;
+        let y = center.y;
 
         // Add walls to form a horizontal line
         for (let i = 0; i < size; i++) {
@@ -97,10 +102,10 @@ export default class WallGenerator {
         }
     }
 
-    generateCrossWall(size) {
-        let coord = this.getGoodCoord();
-        let x = coord.x;
-        let y = coord.y;
+    generateCrossWall(size,center) {
+
+        let x = center.x;
+        let y = center.y;
 
         // Add the central wall to form a cross
         this.addWall(x, y);
@@ -117,4 +122,5 @@ export default class WallGenerator {
             this.addWall(x, y - i);
         }
     }
+
 }
