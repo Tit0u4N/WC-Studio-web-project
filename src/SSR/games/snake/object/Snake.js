@@ -1,5 +1,5 @@
 export default class Snake {
-    constructor(ctx,canvas, boxSize, skin = "default"){
+    constructor(ctx, canvas, boxSize, skin = "default") {
         this.segments = [{x: 5, y: 5}, {x: 4, y: 5}, {x: 3, y: 5}];
         this.direction = "right";
         this.skin = skin;
@@ -7,46 +7,26 @@ export default class Snake {
         this.canvas = canvas;
         this.boxSize = boxSize;
 
-        // Définir les couleurs par défaut
-        this.headColor = "#2b2b2b";
-        this.bodyColor = ["#000000"];
+        // Define default colors
+        this.headAsset = 'assets/skins/snake/default/head.png';
+        this.headImage = new Image();
 
-        // Charger les couleurs à partir du JSON
-        this.loadColors();
-    }
+        // Set source first
+        this.headImage.src = this.headAsset;
+        console.log(this.headAsset)
+        console.log(this.headImage.src)
 
-    async loadColors() {
-        try {
-            // Charger le JSON des couleurs depuis un fichier externe
-            const response = await fetch(`assets/skin/snake.json`);
-            const colorsJson = await response.json();
-
-
-            // Vérifier si le skin spécifié existe dans le JSON, sinon utiliser le skin par défaut
-            const selectedColors = colorsJson[this.skin] || colorsJson["default"];
-
-            // Appliquer les couleurs
-            this.headColor = selectedColors.headColor;
-            this.bodyColor = selectedColors.bodyColor;
-
-            // Si multicolor est activé, utilisez différentes couleurs pour le corps
-
-        } catch (error) {
-            console.error("Erreur lors du chargement des couleurs :", error);
-        }
+        // Load image and then draw once loaded
+        this.headImage.onload = () => {
+            this.draw();
+        };
     }
 
     draw() {
-        // Dessiner le serpent
-        this.segments.forEach((segment, index) => {
-            if (index === 0) {
-                this.ctx.fillStyle = this.headColor;
-            } else {
-                this.ctx.fillStyle = this.bodyColor[index % this.bodyColor.length];
-            }
-            this.ctx.fillRect(segment.x * this.boxSize, segment.y * this.boxSize, this.boxSize, this.boxSize);
-        });
+        // Draw the head of the snake
+        this.ctx.drawImage(this.headImage, this.segments[0].x * this.boxSize, this.segments[0].y * this.boxSize);
     }
+
 
     move() {
         let head = {x: this.segments[0].x, y: this.segments[0].y};

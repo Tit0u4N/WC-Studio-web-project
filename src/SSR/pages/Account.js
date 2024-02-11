@@ -1,9 +1,9 @@
 import {ButtonHover} from "../components/ButtonHover.js";
 import {Inventory} from "../components/AccountSubPages/Inventory.js";
-import {LayoutSubPage} from "../layouts/layoutSubPage.js";
 import {Settings} from "../components/AccountSubPages/Settings.js";
 import {Informations} from "../components/AccountSubPages/Informations.js";
 import {LayoutPage} from "../layouts/LayoutPage.js";
+import {LayoutSubPage} from "../layouts/LayoutSubPage.js";
 
 
 const PageKey = 'account'
