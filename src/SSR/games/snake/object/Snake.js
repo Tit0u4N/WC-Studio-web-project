@@ -8,23 +8,23 @@ export default class Snake {
         this.boxSize = boxSize;
 
         // Define default colors
-        this.headAsset = 'assets/skins/snake/default/head.png';
+        this.headAsset = '/assets/games/snake/default/head.png';
         this.headImage = new Image();
+
+        this.bodyAsset = '/assets/games/snake/default/body.png';
+        this.bodyImage = new Image();
 
         // Set source first
         this.headImage.src = this.headAsset;
-        console.log(this.headAsset)
-        console.log(this.headImage.src)
+        this.bodyImage.src = this.bodyAsset;
 
-        // Load image and then draw once loaded
-        this.headImage.onload = () => {
-            this.draw();
-        };
     }
 
     draw() {
-        // Draw the head of the snake
-        this.ctx.drawImage(this.headImage, this.segments[0].x * this.boxSize, this.segments[0].y * this.boxSize);
+        this.ctx.drawImage(this.headImage, this.segments[0].x * this.boxSize, this.segments[0].y * this.boxSize, this.boxSize, this.boxSize);
+        this.segments.slice(1).forEach(segment => {
+            this.ctx.drawImage(this.bodyImage, segment.x * this.boxSize, segment.y * this.boxSize, this.boxSize, this.boxSize);
+        });
     }
 
 
