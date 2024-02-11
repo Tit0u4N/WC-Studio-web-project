@@ -21,11 +21,28 @@ export default class Snake {
     }
 
     draw() {
-        this.ctx.drawImage(this.headImage, this.segments[0].x * this.boxSize, this.segments[0].y * this.boxSize, this.boxSize, this.boxSize);
-        this.segments.slice(1).forEach(segment => {
-            this.ctx.drawImage(this.bodyImage, segment.x * this.boxSize, segment.y * this.boxSize, this.boxSize, this.boxSize);
-        });
+    this.ctx.save(); // Sauvegarde le contexte actuel
+    this.ctx.translate(this.segments[0].x * this.boxSize + this.boxSize / 2, this.segments[0].y * this.boxSize + this.boxSize / 2); // Translate au centre de la tête
+    switch (this.direction) {
+        case "up":
+            this.ctx.rotate(0);
+            break;
+        case "down":
+            this.ctx.rotate(Math.PI);
+            break;
+        case "left":
+            this.ctx.rotate(-Math.PI / 2);
+            break;
+        case "right":
+            this.ctx.rotate(Math.PI / 2);
+            break;
     }
+    this.ctx.drawImage(this.headImage, -this.boxSize / 2, -this.boxSize / 2, this.boxSize, this.boxSize); // Dessine l'image de la tête
+    this.ctx.restore(); // Restore le contexte précédent
+    this.segments.slice(1).forEach(segment => {
+        this.ctx.drawImage(this.bodyImage, segment.x * this.boxSize, segment.y * this.boxSize, this.boxSize, this.boxSize);
+    });
+}
 
 
     move() {

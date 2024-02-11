@@ -6,6 +6,9 @@ export default class Food {
         this.boxSize=boxSize;
         this.ctx=ctx
         this.color = "#644984";
+        this.asset = '/assets/games/snake/food.png';
+        this.image = new Image();
+        this.image.src = this.asset;
         this.generateFood();
     }
 
@@ -21,10 +24,8 @@ export default class Food {
     }
 
     draw() {
-        // Dessiner la nourriture
-        this.ctx.fillStyle = this.color;
-        this.ctx.beginPath();
-        this.ctx.arc(this.position.x * this.boxSize + this.boxSize / 2, this.position.y * this.boxSize + this.boxSize / 2, this.boxSize / 2, 0, 2 * Math.PI);
-        this.ctx.fill();
+        this.ctx.save();
+        this.ctx.drawImage(this.image, this.position.x * this.boxSize, this.position.y * this.boxSize, this.boxSize, this.boxSize);
+        this.ctx.restore();
     }
 }
