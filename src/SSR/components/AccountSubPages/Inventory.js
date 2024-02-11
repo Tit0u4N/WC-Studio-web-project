@@ -14,7 +14,7 @@ export const Inventory = (id = "Inventory") => {
                         <div class="flex flex-wrap">
                             <template x-for="(skin, skinKey) in getSkins(game)" :key="skin">
                                 <div class="mr-4 mb-4"> <!-- Augmenté la marge à droite et en bas -->
-                                    <img :src="'assets/skins/' + game + '/' + skin + '.png'" 
+                                    <img :src="'assets/games/' + game + '/themes/' + skin + '/preview.png'" 
                                          x-on:click="selectGameSkin(game, skin)"
                                          :class="{ 'bg-purple-400': isGameSkinSelected(game, skin) }"
                                          class="game-skin-image cursor-pointer">
@@ -34,7 +34,7 @@ export const Inventory = (id = "Inventory") => {
 
 export const SkinsGames = {
             "snake": ["default", "electric"],
-            "memory": ["default", "electric"],
+            "memory": ["default"],
         }
 
 
