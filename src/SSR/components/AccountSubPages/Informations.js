@@ -4,12 +4,20 @@ export const Informations = (id = "Informations") => {
     return `
         <div class="flex flex-col justify-between h-full pb-8 pt-4">
         
-            <h3>Nom et Prénom</h3>
+            <div class="flex justify-start items-center">
+                <h3>Nom et Prénom</h3>
+                <div id="aestheticNeon"></div>
+            </div>
+            
             ${FormField("Username", "Exemple : thatcoolusername7979")}
             ${FormField("Surname", "Exemple : coolSurname")}
             ${FormField("Name", "Exemple : coolName")}
     
-            <h3 class="pt-6">Mot de passe</h3>
+            <div class="flex justify-start items-center pt-6">
+                <h3>Mot de passe </h3>
+                <div id="aestheticNeon"></div>
+            </div>
+            
             ${FormField("Password", "****************")}
             ${FormField("Confirm Password", "****************")}
             

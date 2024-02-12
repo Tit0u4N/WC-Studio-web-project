@@ -1,4 +1,4 @@
-// ?? params : ...
+// 2 params : field label, field placeholder
 export const FormField = (label, placeholder) => {
     const lowercaseLabel = label.toLowerCase();
     return `
