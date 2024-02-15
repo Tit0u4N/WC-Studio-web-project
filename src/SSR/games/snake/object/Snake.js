@@ -32,16 +32,37 @@ export default class Snake {
             break;
         case "left":
             this.ctx.rotate(-Math.PI / 2);
+            this.ctx.scale(-1, 1);
             break;
         case "right":
             this.ctx.rotate(Math.PI / 2);
             break;
     }
-    this.ctx.drawImage(this.headImage, -this.boxSize / 2, -this.boxSize / 2, this.boxSize, this.boxSize); // Dessine l'image de la tête
-    this.ctx.restore(); // Restore le contexte précédent
-    this.segments.slice(1).forEach(segment => {
-        this.ctx.drawImage(this.bodyImage, segment.x * this.boxSize, segment.y * this.boxSize, this.boxSize, this.boxSize);
-    });
+    this.ctx.drawImage(this.headImage, -this.boxSize / 2, -this.boxSize / 2, this.boxSize, this.boxSize);
+    this.ctx.restore();
+//  rotation en fonction de la direction du body
+    for (let i = 1; i < this.segments.length; i++) {
+        this.ctx.save();
+        this.ctx.translate(this.segments[i].x * this.boxSize + this.boxSize / 2, this.segments[i].y * this.boxSize + this.boxSize / 2);
+        switch (this.direction) {
+        case "up":
+            this.ctx.rotate(0);
+            break;
+        case "down":
+            this.ctx.rotate(Math.PI);
+            break;
+        case "left":
+            this.ctx.rotate(-Math.PI / 2);
+            this.ctx.scale(-1, 1);
+            break;
+        case "right":
+            this.ctx.rotate(Math.PI / 2);
+            break;
+    }
+    this.ctx.drawImage(this.bodyImage, -this.boxSize / 2, -this.boxSize / 2, this.boxSize, this.boxSize);
+    this.ctx.restore();
+
+    }
 }
 
 
