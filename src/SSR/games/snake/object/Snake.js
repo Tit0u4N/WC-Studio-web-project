@@ -58,6 +58,7 @@ export default class Snake {
         case "right":
             this.ctx.rotate(Math.PI / 2);
             break;
+
     }
     this.ctx.drawImage(this.bodyImage, -this.boxSize / 2, -this.boxSize / 2, this.boxSize, this.boxSize);
     this.ctx.restore();
