@@ -1,0 +1,26 @@
+.success{
+  &-background{
+    width: 120px;
+    height: 80px;
+    background-color: var(--Background-Hight)
+  }
+
+  &-image-container{
+    margin-top: -45%;
+    border-color: gray;
+
+    &.isUnlocked{
+      border-color: var(--HighLight-1);
+    }
+  }
+
+  &-name-text{
+    font-size: small;
+  }
+
+  &-game-name-text{
+    font-size: x-small;
+  }
+}
+
+
