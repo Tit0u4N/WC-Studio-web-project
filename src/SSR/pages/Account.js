@@ -5,6 +5,9 @@ import {Informations} from "../components/AccountSubPages/Informations.js";
 import {LayoutPage} from "../layouts/LayoutPage.js";
 import {LayoutSubPage} from "../layouts/LayoutSubPage.js";
 import {FormField} from "../components/FormField.js";
+import {UserData} from "../../js/global/UserData.js";
+
+
 
 
 const PageKey = 'account'
@@ -37,14 +40,17 @@ export const AccountAlpineData = {
     dataKey: PageKey,
     data : () => ({
         showing: 'inventory',
+        user : UserData.getExistingUserData(),
         isShowing(subpage) {
             return this.showing === subpage;
         },
         setShowing(subpage) {
             if (this.showing === subpage)
                 return
-            if (subpage === 'disconnect')
-                return window.location.href = '/login'
+            if (subpage === 'disconnect') {
+                this.user.reset()
+                window.location.href = '/login'
+            }
             this.showing = subpage;
         }
     })
