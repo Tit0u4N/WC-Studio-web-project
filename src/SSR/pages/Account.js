@@ -4,7 +4,9 @@ import {Settings} from "../components/AccountSubPages/Settings.js";
 import {Informations} from "../components/AccountSubPages/Informations.js";
 import {LayoutPage} from "../layouts/LayoutPage.js";
 import {LayoutSubPage} from "../layouts/LayoutSubPage.js";
+import {FormField} from "../components/FormField.js";
 import {UserData} from "../../js/global/UserData.js";
+
 
 
 
@@ -28,7 +30,6 @@ export const Account =
         LayoutPage(
             PageKey,
             `
-                <h1>Account</h1>
                 ${LayoutSubPage(PageKey, Buttons, SubPages)}
             `
         )
