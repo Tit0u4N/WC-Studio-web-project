@@ -1,0 +1,29 @@
+:root {
+
+  // Colors
+  --Background-Deep: #260F40;
+  --Background-Hight: #3D225D;
+  --Background-Hight-Plus: #4F356E;
+  --Background-Hover: #644984;
+  --HighLight-1: #FF16CD;
+  --HighLight-2: #44EAFF;
+
+  // Text
+  --Heading: #FFFFFF;
+  --Heading-2: #E7E5EA;
+  --Text-paragraphe: #EDC1FE;
+  --Placeholder: rgba(237, 193, 254, 0.50);
+
+  // Gradients
+  --VGradient-red-to-blue: linear-gradient(180deg, #FF16CD 0%, #44EAFF 100%);
+  --VGradient-blue-to-red: linear-gradient(180deg, #44EAFF 0%, #FF16CD 100%);
+  --RadialGradient-blue-red: radial-gradient(50% 50% at 50% 50%, #44EAFF 0%, #FF16CD 100%);
+
+}
+
+@font-face {
+    font-family: 'Kufam';
+    src: url("/public/assets/fonts/Kufam-VariableFont_wght.ttf");
+    font-weight: 100 900;
+}
+

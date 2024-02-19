@@ -1,0 +1,129 @@
+
+export const KEY_USERDATA_LOCALSTORAGE = "userData-WC-Studio"
+
+const USERDATA_DEFAULT = {
+    info: {
+        username: null,
+        password: null,
+        money: 0,
+    },
+    settings : {
+        musicEnable: true,
+        soundEnable: true,
+    },
+    ranking: [
+    ],
+    success: [
+    ],
+    items: [
+    ]
+}
+
+export class UserData{
+
+    static getExistingUserData() {
+        if (localStorage.getItem(KEY_USERDATA_LOCALSTORAGE)) {
+            return new UserData(JSON.parse(localStorage.getItem(KEY_USERDATA_LOCALSTORAGE)));
+        }
+        return new UserData();
+    }
+
+    constructor(userDataJson = null) {
+        if (userDataJson) {
+            this.userDataJson = userDataJson;
+            this.newUserData = false;
+        } else {
+            this.userDataJson = USERDATA_DEFAULT;
+            this.newUserData = true;
+        }
+
+        this.info = this.userDataJson.info;
+        this.settings = this.userDataJson.settings;
+        this.ranking = this.userDataJson.ranking;
+        this.success = this.userDataJson.success;
+    }
+
+    isNewUserData() {
+        return this.newUserData;
+    }
+
+    // Info
+
+    getUsername() {
+        return this.info.username;
+    }
+
+    getPassword() {
+        return this.info.password;
+    }
+
+    getMoney() {
+        return this.info.money;
+    }
+
+    setUsername(username) {
+        this.info.username = username;
+        this.save();
+    }
+
+    setPassword(password) {
+        this.info.password = password;
+        this.save()
+    }
+
+    setMoney(money) {
+        this.info.money = money;
+        this.save()
+    }
+
+    addMoney(money) {
+        this.setMoney(this.info.money + money);
+    }
+
+    removeMoney(money) {
+        if (this.info.money - money < 0) {
+            this.setMoney(0);
+        }
+        this.setMoney(this.info.money - money);
+    }
+
+    // Settings
+
+    getMusicEnable() {
+        return this.settings.musicEnable;
+    }
+
+    getSoundEnable() {
+        return this.settings.soundEnable;
+    }
+
+    setMusicEnable(musicEnable) {
+        this.settings.musicEnable = musicEnable;
+        this.save();
+    }
+
+    setSoundEnable(soundEnable) {
+        this.settings.soundEnable = soundEnable;
+        this.save();
+    }
+
+    // Ranking
+    getRanking() {
+        return this.ranking;
+    }
+
+    // Success
+    getSuccess() {
+        return this.success;
+    }
+    // Items
+    //TODO Définir le format des données d'items
+
+    save() {
+        localStorage.setItem(KEY_USERDATA_LOCALSTORAGE, JSON.stringify(this.userDataJson));
+    }
+
+    reset() {
+        localStorage.removeItem(KEY_USERDATA_LOCALSTORAGE);
+    }
+}
