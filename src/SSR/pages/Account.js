@@ -8,8 +8,6 @@ import {FormField} from "../components/FormField.js";
 import {UserData} from "../../js/global/UserData.js";
 
 
-
-
 const PageKey = 'account'
 
 const Buttons = [
