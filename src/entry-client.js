@@ -43,6 +43,9 @@ Alpine.store('pages', {
     },
     set(page) {
         if (this.showing === page) return;
+        if (page === 'account' && !Alpine.store('user').isConnected()){
+            return;
+        }
         this.showing = page;
     },
 });
