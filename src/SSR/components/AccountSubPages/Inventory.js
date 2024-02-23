@@ -16,7 +16,7 @@ export const Inventory = (id = "Inventory") => {
                                 <div class="mr-4 mb-4"> <!-- Augmenté la marge à droite et en bas -->
                                     <img :src="'assets/games/' + game + '/themes/' + skin + '/preview.png'" 
                                          x-on:click="selectGameSkin(game, skin)"
-                                         :class="{ 'bg-purple-400': isGameSkinSelected(game, skin) }"
+                                         :class="{ 'scale-110 bg-purple-400': isGameSkinSelected(game, skin) }"
                                          class="game-skin-image cursor-pointer">
                                 </div>
                             </template>
@@ -33,7 +33,7 @@ export const Inventory = (id = "Inventory") => {
 
 
 export const SkinsGames = {
-            "snake": ["default", "electric"],
+            "snake": ["default", "purple"],
             "memory": ["default"],
         }
 
@@ -42,7 +42,12 @@ export const GamesInventoryAlpineData = {
     dataKey,
     data: () => ({
         games: SkinsGames,
-        selectedGames: {"snake": "default"},
+        selectedGames: {},
+        init(){
+            for (let game in this.games){
+                this.selectedGames[game] = this.games[game][0];
+            }
+        },
         selectGameSkin(gameKey, skinKey) {
             this.selectedGames[gameKey] = skinKey;
         },
@@ -56,5 +61,9 @@ export const GamesInventoryAlpineData = {
             return this.games[game];
         },
 
-    })
+    }),
+    mounted() {
+        this.init();
+    }
 };
+
