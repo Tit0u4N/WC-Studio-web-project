@@ -29,7 +29,6 @@ export const ShopAlpineData = {
         showing: 'shopbase',
         user : UserData.getExistingUserData(),
         isShowing(subpage) {
-            console.log(this.showing, subpage)
             return this.showing === subpage;
         },
         setShowing(subpage) {
