@@ -18,11 +18,14 @@ const USERDATA_DEFAULT = {
             skins: {
                 default: {
                     Own: 1,
-                    Selected: 1
+                    Selected: 1,
+                    price: 100
+
                 },
                 purple: {
-                    Own: 1,
-                    Selected: 0
+                    Own: 0,
+                    Selected: 0,
+                    price: 100
                 }
             }
         },
@@ -30,7 +33,8 @@ const USERDATA_DEFAULT = {
             skins: {
                 default: {
                     Own: 1,
-                    Selected: 1
+                    Selected: 1,
+                    price: 100
                 }
             }
         }
@@ -135,6 +139,14 @@ export class UserData {
     // Success
     getSuccess() {
         return this.success;
+    }
+    setSuccess(success) {
+        this.userDataJson.success = success;
+        this.save();
+    }
+    addSuccess(success) {
+        this.userDataJson.success.push(success);
+        this.save();
     }
 
     // Items
