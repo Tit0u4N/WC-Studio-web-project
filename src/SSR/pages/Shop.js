@@ -1,5 +1,5 @@
 import {ButtonHover} from "../components/ButtonHover.js";
-import {ShopSubPage} from "../components/ShopSubPages/ShopSubPage.js";
+import {ShopBase} from "../components/ShopSubPages/ShopBase.js";
 import {LayoutPage} from "../layouts/LayoutPage.js";
 import {LayoutSubPage} from "../layouts/LayoutSubPage.js";
 import {UserData} from "../../js/global/UserData.js";
@@ -8,11 +8,11 @@ const PageKey = 'shop'
 
 const Buttons = [
     '<h2 class="pt-4 pb-6" >Shop</h2>',
-    ButtonHover('Shop', {alpineProps: 'x-on:click="setShowing(\'shop-base\')"'}),
+    ButtonHover('Shop', {alpineProps: 'x-on:click="setShowing(\'shopbase\')"'}),
 ]
 
 const SubPages = [
-    ShopSubPage
+    ShopBase
 ]
 
 export const Shop =
@@ -26,9 +26,10 @@ export const Shop =
 export const ShopAlpineData = {
     dataKey: PageKey,
     data : () => ({
-        showing: 'inventory',
+        showing: 'shopbase',
         user : UserData.getExistingUserData(),
         isShowing(subpage) {
+            console.log(this.showing, subpage)
             return this.showing === subpage;
         },
         setShowing(subpage) {
