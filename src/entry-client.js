@@ -6,7 +6,12 @@ import {LoginAlpineData} from "./SSR/pages/Login.js";
 import {UserData} from "./js/global/UserData.js";
 import {AlpineSuccessData} from "./SSR/components/Success.js";
 
-let bgMusic = document.getElementById("backgroundMusic");
+export const bgMusic = document.getElementById("backgroundMusic");
+
+// gestion (à distance) de la musique de fond
+export function setMusicVolume(newVolume){
+    bgMusic.volume = newVolume;
+}
 
 function startBackgroundMusic() {
     bgMusic.play().then(function() {
@@ -18,7 +23,6 @@ function startBackgroundMusic() {
 }
 
 window.addEventListener('click', startBackgroundMusic);
-
 
 const getPageByURL = () => {
     const path = window.location.pathname.replace('/', '');
