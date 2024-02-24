@@ -7,7 +7,6 @@ import {LayoutSubPage} from "../layouts/LayoutSubPage.js";
 import {UserData} from "../../js/global/UserData.js";
 
 
-
 const PageKey = 'account'
 
 const Buttons = [
@@ -28,7 +27,6 @@ export const Account =
         LayoutPage(
             PageKey,
             `
-                <h1>Account</h1>
                 ${LayoutSubPage(PageKey, Buttons, SubPages)}
             `
         )

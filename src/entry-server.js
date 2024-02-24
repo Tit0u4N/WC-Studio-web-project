@@ -7,6 +7,8 @@ import {Head} from "./SSR/Head.js";
 import {Loader} from "./SSR/components/Loader.js";
 import {Memory} from "./SSR/games/memory/Memory.js";
 import {LayoutGamePage} from "./SSR/layouts/LayoutGamePage.js";
+import {Snake} from "./SSR/games/snake/Snake.js";
+
 
 export function render(props) {
     console.log("render", props)
@@ -24,6 +26,10 @@ export function renderGame(game) {
     switch (game.toLowerCase()) {
         case "memory": {
             html += Memory
+            break
+        }
+        case "snake": {
+            html += Snake
             break
         }
         default :
