@@ -8,15 +8,15 @@ export const Header = `
                 <h1 class="text-center mt-3">WC STUDIO</h1>
             </div> 
             <div class="basis-1/4 flex justify-end gap-3 ">
-                <div class="relative" x-show="$store.user.isConnected()">
-                    <a x-on:click="$store.pages.set('shop')" class="cursor-pointer"><img src="/assets/images/Shop.png" alt="SHOP" class="hover:invert"></a>
+                <div class="nav-elem" x-show="$store.user.isConnected()">
+                    <a x-on:click="$store.pages.set('shop')" class="cursor-pointer"><img src="/assets/images/Shop.png" alt="SHOP"></a>
                     <div class="money h-0">
                         <span x-text="$store.user.getMoney()" class="font-bold relative " id="money">xxxx</span>
                         <img class="relative " src="/assets/images/Money.png" alt="Logo money"></a>
                     </div>
                 </div>
                
-                <a x-on:click="$store.pages.set('account')" class="cursor-pointer"><img src="/assets/images/User.png" alt="Account" class="hover:invert"></a>
+                <a x-on:click="$store.pages.set('account')" class="nav-elem cursor-pointer"><img src="/assets/images/User.png" alt="Account"></a>
             </div>
             
         </nav>
