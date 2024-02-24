@@ -13,6 +13,7 @@ const USERDATA_DEFAULT = {
     ranking: [],
     success: [],
     items: {
+
     games: {
         snake: {
             skins: {
@@ -41,7 +42,6 @@ const USERDATA_DEFAULT = {
     }
 }
 
-}
 
 export class UserData {
 
@@ -140,6 +140,7 @@ export class UserData {
     getSuccess() {
         return this.success;
     }
+
     setSuccess(success) {
         this.userDataJson.success = success;
         this.save();
@@ -148,6 +149,8 @@ export class UserData {
         this.userDataJson.success.push(success);
         this.save();
     }
+
+
 
     // Items
     getItems() {

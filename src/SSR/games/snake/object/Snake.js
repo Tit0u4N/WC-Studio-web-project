@@ -1,6 +1,6 @@
 export default class Snake {
     constructor(ctx, canvas, boxSize, skin = "default") {
-        this.segments = [{x: 5, y: 5}, {x: 4, y: 5}, {x: 3, y: 5}];
+        this.segments = [{x: 5, y: 5}, {x: 4, y: 5}];
         this.direction = "right";
         this.skin = skin;
         this.ctx = ctx;
@@ -8,63 +8,58 @@ export default class Snake {
         this.boxSize = boxSize;
 
         // Define default colors
-        this.headAsset = '/assets/games/snake/default/head.png';
+        this.headAsset = '/assets/games/snake/'+this.skin+'/head.png';
         this.headImage = new Image();
 
-        this.bodyAsset = '/assets/games/snake/default/body.png';
+        this.bodyAsset = '/assets/games/snake/'+this.skin+'/body.png';
         this.bodyImage = new Image();
+
+        this.tailAsset = '/assets/games/snake/'+this.skin+'/tail.png';
+        this.tailImage = new Image();
 
         // Set source first
         this.headImage.src = this.headAsset;
         this.bodyImage.src = this.bodyAsset;
+        this.tailImage.src = this.tailAsset;
 
     }
+
+    goodRotateImageSegment(Asset, segment) {
+        this.ctx.save();
+        this.ctx.translate(segment.x * this.boxSize + this.boxSize / 2, segment.y * this.boxSize + this.boxSize / 2);
+        switch (this.direction) {
+            case "left":
+                this.ctx.rotate(0);
+                break;
+            case "up":
+                this.ctx.rotate(90 * Math.PI / 180);
+                break;
+            case "right":
+                this.ctx.rotate(180 * Math.PI / 180);
+                break;
+            case "down":
+                this.ctx.rotate(270 * Math.PI / 180);
+                break;
+        }
+        this.ctx.drawImage(Asset, -this.boxSize / 2, -this.boxSize / 2, this.boxSize, this.boxSize);
+        this.ctx.restore();
+    }
+
+
+
 
     draw() {
-    this.ctx.save(); // Sauvegarde le contexte actuel
-    this.ctx.translate(this.segments[0].x * this.boxSize + this.boxSize / 2, this.segments[0].y * this.boxSize + this.boxSize / 2); // Translate au centre de la tête
-    switch (this.direction) {
-        case "up":
-            this.ctx.rotate(0);
-            break;
-        case "down":
-            this.ctx.rotate(Math.PI);
-            break;
-        case "left":
-            this.ctx.rotate(-Math.PI / 2);
-            this.ctx.scale(-1, 1);
-            break;
-        case "right":
-            this.ctx.rotate(Math.PI / 2);
-            break;
+        this.goodRotateImageSegment(this.headImage, this.segments[0]);
+        // this.ctx.drawImage(this.headImage, this.segments[0].x * this.boxSize, this.segments[0].y * this.boxSize, this.boxSize, this.boxSize);
+        this.segments.slice(1).slice(0, -1).forEach(segment => {
+            this.goodRotateImageSegment(this.bodyImage, segment);
+            // this.ctx.drawImage(this.bodyImage, segment.x * this.boxSize, segment.y * this.boxSize, this.boxSize, this.boxSize);
+        });
+        if (this.segments.length > 1) {
+            this.goodRotateImageSegment(this.tailImage, this.segments[this.segments.length - 1]);
+            // this.ctx.drawImage(this.tailImage, this.segments[this.segments.length - 1].x * this.boxSize, this.segments[this.segments.length - 1].y * this.boxSize, this.boxSize, this.boxSize);
+        }
     }
-    this.ctx.drawImage(this.headImage, -this.boxSize / 2, -this.boxSize / 2, this.boxSize, this.boxSize);
-    this.ctx.restore();
-//  rotation en fonction de la direction du body
-    for (let i = 1; i < this.segments.length; i++) {
-        this.ctx.save();
-        this.ctx.translate(this.segments[i].x * this.boxSize + this.boxSize / 2, this.segments[i].y * this.boxSize + this.boxSize / 2);
-        switch (this.direction) {
-        case "up":
-            this.ctx.rotate(0);
-            break;
-        case "down":
-            this.ctx.rotate(Math.PI);
-            break;
-        case "left":
-            this.ctx.rotate(-Math.PI / 2);
-            this.ctx.scale(-1, 1);
-            break;
-        case "right":
-            this.ctx.rotate(Math.PI / 2);
-            break;
-
-    }
-    this.ctx.drawImage(this.bodyImage, -this.boxSize / 2, -this.boxSize / 2, this.boxSize, this.boxSize);
-    this.ctx.restore();
-
-    }
-}
 
 
     move() {
