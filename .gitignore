@@ -1,4 +1,9 @@
 .idea
+node_modules
+*.css.map
+package-lock.json
+
+dist
 
 # Logs
 logs
