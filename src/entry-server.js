@@ -8,6 +8,7 @@ import {Loader} from "./SSR/components/Loader.js";
 import {Memory} from "./SSR/games/memory/Memory.js";
 import {LayoutGamePage} from "./SSR/layouts/LayoutGamePage.js";
 import {Snake} from "./SSR/games/snake/Snake.js";
+import {Gow} from "./SSR/games/gow/Gow.js";
 
 
 export function render(props) {
@@ -30,6 +31,10 @@ export function renderGame(game) {
         }
         case "snake": {
             html += Snake
+            break
+        }
+        case "gow": {
+            html += Gow
             break
         }
         default :
