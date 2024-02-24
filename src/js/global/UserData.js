@@ -13,7 +13,7 @@ const USERDATA_DEFAULT = {
     ranking: [],
     success: [],
     items: {
-        skins: {}, select: {}
+        skins: {"snake-default": {"Own": 1,"Selected":1},"snake-purple":{"Own": 1,"Selected":0},"memory-default":{"Own": 1,"Selected":1}}
     }
 }
 
