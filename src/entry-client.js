@@ -6,6 +6,20 @@ import {LoginAlpineData} from "./SSR/pages/Login.js";
 import {UserData} from "./js/global/UserData.js";
 import {AlpineSuccessData} from "./SSR/components/Success.js";
 
+let bgMusic = document.getElementById("backgroundMusic");
+
+function startBackgroundMusic() {
+    bgMusic.play().then(function() {
+        console.log("backgorund music loop started !");
+        window.removeEventListener('click', startBackgroundMusic);
+    }).catch(function(error) {
+        console.log("music loop start error :", error);
+    });
+}
+
+window.addEventListener('click', startBackgroundMusic);
+
+
 const getPageByURL = () => {
     const path = window.location.pathname.replace('/', '');
     switch (path) {

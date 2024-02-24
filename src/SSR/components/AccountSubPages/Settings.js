@@ -8,7 +8,7 @@ export const Settings = (id = "Settings") => {
             <div class="pt-8">
                 ${NeonHeaderBar("Sound")}
                 <div class="p-4">
-                    ${SoundSetter("Menu Background Music", "To Be Defined")}
+                    ${SoundSetter("Menu Background Music", "/assets/musics/toothlesssynthwave100bpmtest2.mp3")}
                 </div>
             </div>
         </div>
