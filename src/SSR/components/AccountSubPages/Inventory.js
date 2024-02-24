@@ -1,3 +1,5 @@
+
+
 const dataKey = "GamesInventory";
 
 export const Inventory = (id = "Inventory") => {
@@ -16,7 +18,7 @@ export const Inventory = (id = "Inventory") => {
                                 <div class="mr-4 mb-4"> <!-- Augmenté la marge à droite et en bas -->
                                     <img :src="'assets/games/' + game + '/themes/' + skin + '/preview.png'" 
                                          x-on:click="selectGameSkin(game, skin)"
-                                         :class="{ 'scale-110 bg-purple-400': isGameSkinSelected(game, skin) }"
+                                         :class="{ 'grayscale ': !isGameSkinSelected(game, skin) }"
                                          class="game-skin-image cursor-pointer">
                                 </div>
                             </template>
@@ -32,29 +34,54 @@ export const Inventory = (id = "Inventory") => {
 };
 
 
-export const SkinsGames = {
-            "snake": ["default", "purple"],
-            "memory": ["default"],
-        }
-
 
 export const GamesInventoryAlpineData = {
     dataKey,
     data: () => ({
-        games: SkinsGames,
+        games: {},
         selectedGames: {},
-        init(){
-            for (let game in this.games){
-                this.selectedGames[game] = this.games[game][0];
+
+        init() {
+            let stocks = this.$store.user.data.getItems();
+
+
+            for (const key in stocks.skins) {
+                if (stocks.skins[key].Own === 0) {
+                    continue;
+                }
+                const [game, skin] = key.split("-");
+                if (!this.games[game]) {
+                    this.games[game] = [];
+                }
+                if (!(this.games[game].includes(skin))) {
+                    this.games[game].push(skin);
+                }
+
+                if (stocks.skins[key].Selected === 1) {
+                    this.selectedGames[game] = skin;
+                }
+
             }
         },
         selectGameSkin(gameKey, skinKey) {
-            this.selectedGames[gameKey] = skinKey;
+            let stocks = this.$store.user.data.getItems();
+            stocks.skins[`${gameKey}-${skinKey}`].Selected = 1;
+            for (const key in stocks.skins) {
+                if (key.startsWith(gameKey) && key !== `${gameKey}-${skinKey}`) {
+                    stocks.skins[key].Selected = 0;
+                }
+            }
+            this.$store.user.data.setItems(stocks);
+            this.init();
+
+
+
         },
         isGameSkinSelected(gameKey, skinKey) {
             return this.selectedGames[gameKey] === skinKey;
         },
         getGames() {
+            this.init();
             return Object.keys(this.games);
         },
         getSkins(game) {
