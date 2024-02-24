@@ -1,0 +1,13 @@
+.game-skin-image {
+    width: 150px; /* Ajustez la taille selon vos besoins */
+    height: auto; /* Pour garder les proportions */
+    cursor: pointer; /* Curseur change au survol */
+    transition: transform 0.2s ease, box-shadow 0.3s ease; /* Transition fluide */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Ombre légère */
+}
+
+.game-skin-image:hover {
+    transform: scale(1.05); /* Agrandissement au survol */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Ombre légèrement plus prononcée */
+}

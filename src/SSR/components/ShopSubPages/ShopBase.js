@@ -15,7 +15,7 @@ export const ShopBase = (id = "shopbase") => {
                                 <div class="mr-4 mb-4"> <!-- Augmenté la marge à droite et en bas -->
                                     <img :src="'assets/games/' + game + '/themes/' + skin + '/preview.png'" 
                                          x-on:click="selectGameSkin(game, skin)"
-                                         :class="{ 'grayscale ': !isGameSkinSelected(game, skin) }"
+                                         :class="{ 'blur ': !isGameSkinSelected(game, skin) }"
                                          class="game-skin-image cursor-pointer">
                                 </div>
                             </template>
@@ -39,16 +39,13 @@ export const ShopBaseAlpineData = {
 
         init() {
             let stocks = this.$store.user.data.getItems();
-            console.log(stocks);
 
             for (const key in stocks.games) {
-                console.log(key);
                 for (const skin in stocks.games[key].skins) {
                     if (stocks.games[key].skins[skin].Own === 1) {
                         if (!this.games[key]) {
                             this.games[key] = [];
                         }
-
                         if (!(this.games[key].includes(skin))) {
                             this.games[key].push(skin);
                         }
@@ -58,8 +55,6 @@ export const ShopBaseAlpineData = {
                     }
                 }
             }
-            console.log(this.games);
-            console.log(this.selectedGames);
         },
         selectGameSkin(gameKey, skinKey) {
             let stocks = this.$store.user.data.getItems();
