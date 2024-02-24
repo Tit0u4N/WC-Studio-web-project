@@ -1,4 +1,3 @@
-
 export const KEY_USERDATA_LOCALSTORAGE = "userData-WC-Studio"
 
 const USERDATA_DEFAULT = {
@@ -7,19 +6,18 @@ const USERDATA_DEFAULT = {
         password: null,
         money: 0,
     },
-    settings : {
+    settings: {
         musicEnable: true,
         soundEnable: true,
     },
-    ranking: [
-    ],
-    success: [
-    ],
-    items: [
-    ]
+    ranking: [],
+    success: [],
+    items: {
+        skins: {}, select: {}
+    }
 }
 
-export class UserData{
+export class UserData {
 
     static getExistingUserData() {
         if (localStorage.getItem(KEY_USERDATA_LOCALSTORAGE)) {
@@ -116,8 +114,16 @@ export class UserData{
     getSuccess() {
         return this.success;
     }
+
     // Items
-    //TODO Définir le format des données d'items
+    getItems() {
+        return this.userDataJson.items;
+    }
+
+    setItems(items) {
+        this.userDataJson.items = items;
+        this.save();
+    }
 
     save() {
         localStorage.setItem(KEY_USERDATA_LOCALSTORAGE, JSON.stringify(this.userDataJson));
