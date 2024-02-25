@@ -18,6 +18,5 @@ export const Header = `
                
                 <a x-on:click="$store.pages.set('account')" class="cursor-pointer"><img src="/assets/images/User.png" alt="Account" class="hover:invert"></a>
             </div>
-            
         </nav>
     </header>`

@@ -82,16 +82,6 @@ window.addEventListener('alpine:init', () => {
     }
 
     Alpine.store('music').init()
-    /*
-    let musicLaunched = false;
-
-    window.addEventListener('click', () => {
-        if (!musicLaunched) {
-            Alpine.store('music').start();
-            musicLaunched = true;
-        }
-    });
-    */
 
     setTimeout(() => {
         document.getElementById("pageLoader").classList.toggle("!hidden", true);
