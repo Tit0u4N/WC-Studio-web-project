@@ -71,9 +71,6 @@ export const ShopBaseAlpineData = {
                 }
             }
 
-            console.log("this.owneds", this.owneds)
-            console.log("this.notowned", this.notowned)
-
             this.getAllskins();
 
 
