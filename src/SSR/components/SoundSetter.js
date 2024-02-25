@@ -16,10 +16,10 @@ export const SoundSetter = (title, musicWavFileUrl) => {
           after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#EDC1FE]"></div>
         </label>
 
-        <!--
-        <input type="range" min="0" max="1" step="0.1" value="0.5" onchange="setMusicVolume(this.value)"
-               class="range pr-6 accent-[#EDC1FE]">
-        -->
+        
+        <input type="range" min="0" max="1.0" step="0.1" value="0.5" x-data="$store.music" x-on:change="setVolume($event.target.value)"
+               class="range accent-[#EDC1FE]">
+        
 
     </div>
     `

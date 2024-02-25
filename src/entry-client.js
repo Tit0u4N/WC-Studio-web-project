@@ -6,24 +6,6 @@ import {LoginAlpineData} from "./SSR/pages/Login.js";
 import {UserData} from "./js/global/UserData.js";
 import {AlpineSuccessData} from "./SSR/components/Success.js";
 
-export const bgMusic = document.getElementById("backgroundMusic");
-
-// gestion (à distance) de la musique de fond
-export function setMusicVolume(newVolume){
-    bgMusic.volume = newVolume;
-}
-
-function startBackgroundMusic() {
-    bgMusic.play().then(function() {
-        console.log("backgorund music loop started !");
-        window.removeEventListener('click', startBackgroundMusic);
-    }).catch(function(error) {
-        console.log("music loop start error :", error);
-    });
-}
-
-window.addEventListener('click', startBackgroundMusic);
-
 const getPageByURL = () => {
     const path = window.location.pathname.replace('/', '');
     switch (path) {
@@ -65,6 +47,23 @@ Alpine.store('pages', {
     },
 });
 
+Alpine.store('music', {
+    player: null,
+    init() {
+        this.player = document.getElementById("backgroundMusic");
+        this.setVolume(0.5);
+    },
+    start() {
+        this.player.play();
+    },
+    pause() {
+        this.player.pause();
+    },
+    setVolume(newVolume){
+        this.player.volume = newVolume;
+    }
+});
+
 Alpine.data(LoginAlpineData.dataKey, LoginAlpineData.data);
 Alpine.data(AccountAlpineData.dataKey, AccountAlpineData.data);
 Alpine.data(RankBoardAlpineData.dataKey, RankBoardAlpineData.data);
@@ -75,6 +74,16 @@ window.addEventListener('alpine:init', () => {
     if (UserData.getExistingUserData().isNewUserData()) {
         Alpine.store('pages').set('login');
     }
+
+    Alpine.store('music').init()
+    let musicLaunched = false;
+
+    window.addEventListener('click', () => {
+        if (!musicLaunched) {
+            Alpine.store('music').start();
+            musicLaunched = true;
+        }
+    });
 
     setTimeout(() => {
         document.getElementById("pageLoader").classList.toggle("!hidden", true);
