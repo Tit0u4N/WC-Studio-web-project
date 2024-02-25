@@ -49,15 +49,22 @@ Alpine.store('pages', {
 
 Alpine.store('music', {
     player: null,
+    isPlaying: null,
     init() {
         this.player = document.getElementById("backgroundMusic");
         this.setVolume(0.5);
+        this.isPlaying = false;
+        console.log("music is ready to play !");
     },
     start() {
+        console.log("play !");
         this.player.play();
+        this.isPlaying = true;
     },
     pause() {
+        console.log("paused !");
         this.player.pause();
+        this.isPlaying = false;
     },
     setVolume(newVolume){
         this.player.volume = newVolume;
@@ -67,15 +74,15 @@ Alpine.store('music', {
 Alpine.data(LoginAlpineData.dataKey, LoginAlpineData.data);
 Alpine.data(AccountAlpineData.dataKey, AccountAlpineData.data);
 Alpine.data(RankBoardAlpineData.dataKey, RankBoardAlpineData.data);
-
-
 Alpine.data(AlpineSuccessData.dataKey, AlpineSuccessData.data);
+
 window.addEventListener('alpine:init', () => {
     if (UserData.getExistingUserData().isNewUserData()) {
         Alpine.store('pages').set('login');
     }
 
     Alpine.store('music').init()
+    /*
     let musicLaunched = false;
 
     window.addEventListener('click', () => {
@@ -84,6 +91,7 @@ window.addEventListener('alpine:init', () => {
             musicLaunched = true;
         }
     });
+    */
 
     setTimeout(() => {
         document.getElementById("pageLoader").classList.toggle("!hidden", true);
