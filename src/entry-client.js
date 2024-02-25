@@ -7,6 +7,7 @@ import {UserData} from "./js/global/UserData.js";
 import {AlpineSuccessData} from "./SSR/components/Success.js";
 import {GamesInventoryAlpineData} from "./SSR/components/AccountSubPages/Inventory.js";
 import {ShopAlpineData} from "./SSR/pages/Shop.js";
+import {ShopBaseAlpineData} from "./SSR/components/ShopSubPages/ShopBase.js";
 
 const getPageByURL = () => {
     const path = window.location.pathname.replace('/', '');
@@ -56,7 +57,9 @@ Alpine.data(LoginAlpineData.dataKey, LoginAlpineData.data);
 Alpine.data(AccountAlpineData.dataKey, AccountAlpineData.data);
 Alpine.data(RankBoardAlpineData.dataKey, RankBoardAlpineData.data);
 Alpine.data(GamesInventoryAlpineData.dataKey, GamesInventoryAlpineData.data);
+
 Alpine.data(ShopAlpineData.dataKey, ShopAlpineData.data);
+
 
 
 Alpine.data(AlpineSuccessData.dataKey, AlpineSuccessData.data);
