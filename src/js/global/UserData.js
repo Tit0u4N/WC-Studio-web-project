@@ -13,9 +13,35 @@ const USERDATA_DEFAULT = {
     ranking: [],
     success: [],
     items: {
-        skins: {"snake-default": {"Own": 1,"Selected":1},"snake-purple":{"Own": 1,"Selected":0},"memory-default":{"Own": 1,"Selected":1}}
+        games: {
+            snake: {
+                skins: {
+                    default: {
+                        Own: 1,
+                        Selected: 1,
+                        price: 100
+
+                    },
+                    purple: {
+                        Own: 0,
+                        Selected: 0,
+                        price: 100
+                    }
+                }
+            },
+            memory: {
+                skins: {
+                    default: {
+                        Own: 1,
+                        Selected: 1,
+                        price: 100
+                    }
+                }
+            }
+        }
     }
 }
+
 
 export class UserData {
 
@@ -114,6 +140,17 @@ export class UserData {
     getSuccess() {
         return this.success;
     }
+
+    setSuccess(success) {
+        this.userDataJson.success = success;
+        this.save();
+    }
+
+    addSuccess(success) {
+        this.userDataJson.success.push(success);
+        this.save();
+    }
+
 
     // Items
     getItems() {
