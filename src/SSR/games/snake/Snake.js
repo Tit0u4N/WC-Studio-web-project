@@ -1,5 +1,3 @@
-
-
 export const Snake = `
 <div id="gameContainer">
     <canvas id="snakeCanvas"  class="border-4" width="600" height="600"></canvas>
