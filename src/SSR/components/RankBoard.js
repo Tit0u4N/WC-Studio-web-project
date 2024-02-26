@@ -1,35 +1,35 @@
 const dataKey = 'rankBoard';
 
+const games = ["Memory", "Snake"];
+
 const playerRow = (index) => {
     return `
-        <div class="flex ">
-            <div class=" border-r-2 border-t-2 px-4 py-2 w-2/12">
-                <span x-text="getPlayerData(${index})?.position" class="text-center "></span>
+        <div class="flex h-[44px]">
+            <div class=" border-r-2 border-t-2 pb-2 pt-3 pl-3 w-2/12">
+                <span x-text="getPlayerData(${index})?.position" class="text-center"></span>
             </div>
-            <div class="border-r-2 border-t-2 px-4 py-2 w-6/12">
-                <span x-text="getPlayerData(${index})?.name" class="  text-center  "></span>
+            <div class="border-r-2 border-t-2 pb-2 pt-3 pl-2 w-6/12">
+                <span x-text="getPlayerData(${index})?.name" class="text-center"></span>
             </div>
-            <div class="border-r-2 border-t-2 px-4 py-2 w-4/12">
-                <span x-text="getPlayerData(${index})?.score" class=" text-center"></span>
+            <div class="border-r-2 border-t-2 pb-2 pt-3 pl-3 w-4/12">
+                <span x-text="getPlayerData(${index})?.score" class="text-center"></span>
             </div>
-            <div class=" border-t-2 px-4 py-2 w-4/12">
-                <span x-text="getPlayerData(${index})?.success" class=" text-center"></span>
+            <div class=" border-t-2 pb-2 pt-3 pl-3 w-4/12">
+                <span x-text="getPlayerData(${index})?.success" class="text-center"></span>
             </div>
         </div>
     `;
 };
 
-
 const renderFilter = () => {
 return `
-    <div class="flex flex-col [80%]: flex-row">
-        <div x-on:click="keepGame('all')" :class="{ 'bg-purple-200': selectedGame === 'all' }" class="cursor-pointer text-white p-2 w-full md:w-auto md:hover:bg-gray-300 md:rounded-md mb-2 md:mb-0">All</div>
-
-        <template x-for="(game, index) in getGames()" :key="game">
-            <div x-on:click="keepGame(game)" :class="{ 'bg-purple-200': selectedGame === game }" class="cursor-pointer text-white p-2 w-full md:w-auto md:hover:bg-purple-300 transition duration-300 ease-in-out rounded-md mb-2 md:mb-0" x-text="game"></div>
-        </template>
-
-        <button x-on:click="showMoreGames" class="cursor-pointer text-black p-2 bg-purple-100 hover:bg-purple-300 transition duration-300 ease-in-out rounded-md w-full md:w-auto">More</button>
+    <div class="flex flex-col px-1 pb-1">
+        <select x-on:change="keepGame($event.target.value)" id="rankboard-game-select" class="select border border-purple-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+        <option selected value="all">All</option>  
+        ${games.map(game => {
+            return `<option value="${game}">${game}</option>`;
+          }).join('')}
+        </select>
     </div>
 `;
 
@@ -38,12 +38,12 @@ return `
 
 const renderHeaderTable = () => {
     return `
-       <div class="flex text-white">
-    <div class="border-t-2 px-4 py-2  w-2/12">#</div>
-    <div class="border-t-2 px-4 py-2 w-6/12">Name</div>
-    <div class="border-t-2 px-4 py-2 w-4/12 hover:bg-purple-300 transition duration-300 ease-in-out " x-on:click="sortByPoints()" x-bind:class="{'bg-purple-200 rounded-md ': pointSelected }">Points</div>
-    <div class="border-t-2 px-4 py-2 w-4/12 hover:bg-purple-300 transition duration-300 ease-in-out " x-on:click="sortBySuccess()" x-bind:class="{ 'bg-purple-200 rounded-md ': !pointSelected}">Success</div>
-</div>
+    <div class="flex text-white">
+        <div class="select-none border-t-2 px-4 py-3 w-2/12">#</div>
+        <div class="select-none border-t-2 px-4 py-3 w-6/12">Name</div>
+        <div class="select-none cursor-pointer border-t-2 px-4 py-3 w-4/12 hover:bg-[#EDC1FE7F] transition duration-300 ease-in-out " x-on:click="sortByPoints()" x-bind:class="{'underline': pointSelected }">Points</div>
+        <div class="select-none cursor-pointer border-t-2 px-4 py-3 w-4/12 hover:bg-[#EDC1FE7F] transition duration-300 ease-in-out " x-on:click="sortBySuccess()" x-bind:class="{ 'underline': !pointSelected}">Success</div>
+    </div>
     `;
 
 };
@@ -51,21 +51,21 @@ const renderHeaderTable = () => {
 const renderPlayerPagesNavigation = () => {
     return `
             <div class="flex items-center space-x-2 justify-center">
-    <button x-on:click="showPastPlayersPage" class="cursor-pointer text-white p-2  hover:bg-purple-300 transition duration-300 ease-in-out rounded-md">
-        &larr; <!-- Flèche vers la gauche -->
+    <button x-on:click="showPastPlayersPage" class="cursor-pointer text-white p-2 hover:bg-[#EDC1FE7F] transition duration-300 ease-in-out rounded-md">
+        &larr;
     </button>
     
     <template x-for="index in getNumberPlayerPages()" :key="index">
         <button
             x-on:click="getToPlayerPages(index)"
-            :class="{ 'bg-purple-200': currentPlayersPages === index-1 }"
-            class="cursor-pointer text-white p-2 hover:bg-purple-300 transition duration-300 ease-in-out rounded-md"
+            :class="{ 'underline': currentPlayersPages === index-1 }"
+            class="cursor-pointer text-white p-2 hover:bg-[#EDC1FE7F] transition duration-300 ease-in-out rounded-md"
             x-text="index"
         ></button>
     </template>
 
-    <button x-on:click="showNextPlayersPage" class="cursor-pointer text-white p-2  hover:bg-purple-300 transition duration-300 ease-in-out rounded-md">
-        &rarr; <!-- Flèche vers la droite -->
+    <button x-on:click="showNextPlayersPage" class="cursor-pointer text-white p-2 hover:bg-[#EDC1FE7F] transition duration-300 ease-in-out rounded-md">
+        &rarr;
     </button>
 </div>
  
@@ -100,8 +100,8 @@ const renderPlayerTable = () => {
 
 
 export const RankBoard = `
-    <div x-data="${dataKey}" x-init="initPlayersData()" class="rankBoard w-1/4 mx-auto float-right  rounded-3xl border-2 ">
-            <h1 class="font-bold text-center">Rank</h1>
+    <div x-data="${dataKey}" x-init="initPlayersData()" class="rankBoard container-style--hight w-1/4 mx-auto rounded-3xl border-2 ">
+            <h1 class="font-bold text-center py-3">Rank</h1>
             ${renderFilter()}
             <div class="flex flex-col overflow-auto ">
                 ${renderHeaderTable()}
@@ -160,7 +160,7 @@ export const RankBoardAlpineData = { dataKey, data : () => ({
         },
         playersData: [],
         pointSelected: true,
-        games : ["Chess", "Poker", "Memory", "Tetris", "Sudoku", "Minesweeper"],
+        games : games,
         numberOfGames: 0,
         selectedGame: 'all',
         numberOfGamesPerPage: 4,
