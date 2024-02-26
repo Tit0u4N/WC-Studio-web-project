@@ -8,13 +8,13 @@ export default class Snake {
         this.boxSize = boxSize;
 
         // Define default colors
-        this.headAsset = '/assets/games/snake/'+this.skin+'/head.png';
+        this.headAsset = '/assets/games/snake/themes/'+this.skin+'/head.png';
         this.headImage = new Image();
 
-        this.bodyAsset = '/assets/games/snake/'+this.skin+'/body.png';
+        this.bodyAsset = '/assets/games/snake/themes/'+this.skin+'/body.png';
         this.bodyImage = new Image();
 
-        this.tailAsset = '/assets/games/snake/'+this.skin+'/tail.png';
+        this.tailAsset = '/assets/games/snake/themes/'+this.skin+'/tail.png';
         this.tailImage = new Image();
 
         // Set source first
