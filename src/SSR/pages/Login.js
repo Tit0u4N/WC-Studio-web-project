@@ -15,7 +15,7 @@ export const Login = LayoutPage(PageKey,
           <div>
             <label for="username" class="block text-xl font-medium leading-6 text-white">Username : </label>
             <div class="mt-2">
-              <input x-model="username" id="username" name="username" autocomplete="username" placeholder="thatcoolusername6969" required 
+              <input x-model="username" name="username" autocomplete="username" placeholder="thatcoolusername6969" required 
                     class="block w-full rounded-2xl border-2 border-purple-300 px-3.5 py-2 text-gray-300 shadow-xl 
                            text-xl leading-6 bg-[#4F356E]"
               >
@@ -27,7 +27,7 @@ export const Login = LayoutPage(PageKey,
               <label for="password" class="block text-xl font-medium leading-6 text-white">Password : </label>
             </div>
             <div id="password-class" class="mt-2">
-              <input x-model="password" id="password" name="password" type="password" autocomplete="current-password" placeholder="****************" required 
+              <input x-model="password" name="password" type="password" autocomplete="current-password" placeholder="****************" required 
                     class="block w-full rounded-2xl border-2 border-purple-300 px-3.5 py-2 text-gray-300 shadow-xl
                            text-xl leading-6 bg-[#4F356E]"
               >
