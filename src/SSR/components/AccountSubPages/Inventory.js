@@ -1,5 +1,3 @@
-
-
 const dataKey = "GamesInventory";
 
 export const Inventory = (id = "Inventory") => {
@@ -34,7 +32,6 @@ export const Inventory = (id = "Inventory") => {
 };
 
 
-
 export const GamesInventoryAlpineData = {
     dataKey,
     data: () => ({
@@ -44,36 +41,33 @@ export const GamesInventoryAlpineData = {
         init() {
             let stocks = this.$store.user.data.getItems();
 
+            for (const key in stocks.games) {
+                for (const skin in stocks.games[key].skins) {
+                    if (stocks.games[key].skins[skin].Own === 1) {
+                        if (!this.games[key]) {
+                            this.games[key] = [];
+                        }
 
-            for (const key in stocks.skins) {
-                if (stocks.skins[key].Own === 0) {
-                    continue;
-                }
-                const [game, skin] = key.split("-");
-                if (!this.games[game]) {
-                    this.games[game] = [];
-                }
-                if (!(this.games[game].includes(skin))) {
-                    this.games[game].push(skin);
-                }
 
-                if (stocks.skins[key].Selected === 1) {
-                    this.selectedGames[game] = skin;
+                        if (!(this.games[key].includes(skin))) {
+                            this.games[key].push(skin);
+                        }
+                        if (stocks.games[key].skins[skin].Selected === 1) {
+                            this.selectedGames[key] = skin;
+                        }
+                    }
                 }
 
             }
         },
         selectGameSkin(gameKey, skinKey) {
             let stocks = this.$store.user.data.getItems();
-            stocks.skins[`${gameKey}-${skinKey}`].Selected = 1;
-            for (const key in stocks.skins) {
-                if (key.startsWith(gameKey) && key !== `${gameKey}-${skinKey}`) {
-                    stocks.skins[key].Selected = 0;
-                }
-            }
+            stocks.games[gameKey].skins[skinKey].Selected = 1;
+            let previousSkin = this.selectedGames[gameKey];
+            stocks.games[gameKey].skins[previousSkin].Selected = 0;
             this.$store.user.data.setItems(stocks);
+            this.selectedGames[gameKey] = skinKey;
             this.init();
-
 
 
         },
@@ -81,7 +75,7 @@ export const GamesInventoryAlpineData = {
             return this.selectedGames[gameKey] === skinKey;
         },
         getGames() {
-            this.init();
+
             return Object.keys(this.games);
         },
         getSkins(game) {
