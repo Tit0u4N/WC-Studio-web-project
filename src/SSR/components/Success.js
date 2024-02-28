@@ -3,19 +3,44 @@ const success = [
         id: 1,
         name: "First Game",
         game: "Game 1",
-        imgPath: "success-icon.png"
+        imgPath: "success-icon.png",
     },
     {
         id: 2,
         name: "Second Game",
         game: "Game 2",
-        imgPath: "success-icon.png"
+        imgPath: "success-icon.png",
     },
     {
         id: 3,
         name: "Third Game",
         game: "Game 3",
-        imgPath: "success-icon.png"
+        imgPath: "success-icon.png",
+    },
+    {
+        id: 4,
+        name: "SpeedRun Easy",
+        game: "memory",
+        imgPath: "success-icon.png",
+    },
+    {
+        id: 5,
+        name: "SpeedRun Medium",
+        game: "memory",
+        imgPath: "success-icon.png",
+    },
+    {
+        id: 6,
+        name: "SpeedRun HARD",
+        game: "memory",
+        imgPath: "success-icon.png",
+        acquired: false
+    },
+    {
+        id: 7,
+        name: "Speedy Gonzales",
+        game: "memory",
+        imgPath: "success-icon.png",
     }
 ]
 
