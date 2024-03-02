@@ -17,6 +17,13 @@ const success = [
         game: "Game 3",
         imgPath: "success-icon.png"
     }
+    ,
+    {
+        id: 13,
+        name: "Not enough money",
+        game: "Shop",
+        imgPath: "success-icon.png"
+    }
 ]
 
 const alpinDataKey = 'success'
