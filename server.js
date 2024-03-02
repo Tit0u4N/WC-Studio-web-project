@@ -53,11 +53,7 @@ const getRenderedTemplate = async (req) => {
         template = templateHtml
         entryServer = (await import('./dist/server/entry-server.js'))
     }
-    if (isGame(req)) {
-        rendered = entryServer.renderGame(req.originalUrl.replace('/game/', ''))
-    } else {
-        rendered = entryServer.render(req.originalUrl, ssrManifest)
-    }
+    rendered = entryServer.render(req.originalUrl, ssrManifest)
     return {rendered, template}
 }
 

@@ -1,9 +1,8 @@
-export const AccountSubPageCSSClasses = "container-style flex-auto w-full p-4"
 
 const writeSubPages = (page, subPages) => {
     return subPages.map(subPage => {
         return `
-            <div x-show="isShowing('${subPage.name.toLowerCase()}')" class="${AccountSubPageCSSClasses}">
+            <div x-show="isShowing('${subPage.name.toLowerCase()}')" class="container-style flex-auto w-full p-4">
                 ${subPage()}
             </div>
         `
