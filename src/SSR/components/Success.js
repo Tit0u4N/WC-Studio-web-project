@@ -71,6 +71,12 @@ const success = [
         name: "Where are a you",
         game: "snake",
         imgPath: "success-icon.png",
+    },
+    {
+        id: 13,
+        name: "Not enough money",
+        game: "Shop",
+        imgPath: "success-icon.png"
     }
 
 ]
