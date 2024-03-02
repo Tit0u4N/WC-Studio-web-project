@@ -1,10 +1,11 @@
 import {UserData} from "../../../../js/global/UserData.js";
 
 export default class Snake {
-    constructor(ctx, canvas, boxSize, skin = "default") {
+    constructor(ctx, canvas, boxSize) {
         this.segments = [{x: 5, y: 5}, {x: 4, y: 5}];
         this.direction = "right";
-        this.skin = skin;
+        this.userData = UserData.getExistingUserData();
+        this.skin = this.userData.getSkinSelected("snake");
         this.ctx = ctx;
         this.canvas = canvas;
         this.boxSize = boxSize;
