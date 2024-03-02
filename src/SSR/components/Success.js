@@ -41,14 +41,44 @@ const success = [
         name: "Speedy Gonzales",
         game: "memory",
         imgPath: "success-icon.png",
-    }
-    ,
+    },
+    {
+        id: 8,
+        name: "Did you read the rules?",
+        game: "snake",
+        imgPath: "success-icon.png",
+    },
+    {
+        id: 9,
+        name: "You're not eatable",
+        game: "snake",
+        imgPath: "success-icon.png",
+    },
+    {
+        id: 10,
+        name: "OUCH! That hurts!",
+        game: "snake",
+        imgPath: "success-icon.png",
+    },
+    {
+        id: 11,
+        name: "Why are you running?",
+        game: "snake",
+        imgPath: "success-icon.png",
+    },
+    {
+        id: 12,
+        name: "Where are a you",
+        game: "snake",
+        imgPath: "success-icon.png",
+    },
     {
         id: 13,
         name: "Not enough money",
         game: "Shop",
         imgPath: "success-icon.png"
     }
+
 ]
 
 const alpinDataKey = 'success'
