@@ -42,7 +42,6 @@ const USERDATA_DEFAULT = {
     }
 }
 
-
 export class UserData {
 
     static getExistingUserData() {
