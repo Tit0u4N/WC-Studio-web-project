@@ -1,3 +1,5 @@
+import {UserData} from "../../../../js/global/UserData.js";
+
 export default class Snake {
     constructor(ctx, canvas, boxSize, skin = "default") {
         this.segments = [{x: 5, y: 5}, {x: 4, y: 5}];
@@ -6,6 +8,7 @@ export default class Snake {
         this.ctx = ctx;
         this.canvas = canvas;
         this.boxSize = boxSize;
+        this.userData = UserData.getExistingUserData();
 
         // Define default colors
         this.headAsset = '/assets/games/snake/themes/'+this.skin+'/head.png';
@@ -21,6 +24,7 @@ export default class Snake {
         this.headImage.src = this.headAsset;
         this.bodyImage.src = this.bodyAsset;
         this.tailImage.src = this.tailAsset;
+
 
     }
 
@@ -82,7 +86,11 @@ export default class Snake {
     }
 
     checkCollisionWithSelf() {
-        return this.segments.slice(1).some(segment => segment.x === this.segments[0].x && segment.y === this.segments[0].y);
+        let collision = this.segments.slice(1).some(segment => segment.x === this.segments[0].x && segment.y === this.segments[0].y);
+        if (collision) {
+            this.userData.addSuccess(9)
+        }
+        return collision;
     }
 
     checkCollisionWithWall(walls) {
@@ -93,6 +101,9 @@ export default class Snake {
                 collision = true;
             }
         });
+        if (collision) {
+            this.userData.addSuccess(10)
+        }
         return collision;
     }
 
@@ -101,7 +112,11 @@ export default class Snake {
     }
 
     checkCollisionWithOutOfBounds(canvas) {
-        return this.segments[0].x < 0 || this.segments[0].x >= canvas.width / this.boxSize || this.segments[0].y < 0 || this.segments[0].y >= canvas.height / this.boxSize;
+        let collision = this.segments[0].x < 0 || this.segments[0].x >= canvas.width / this.boxSize || this.segments[0].y < 0 || this.segments[0].y >= canvas.height / this.boxSize;
+        if (collision) {
+            this.userData.addSuccess(11)
+        }
+        return collision;
     }
 
     checkCollision(walls, food, canvas) {
