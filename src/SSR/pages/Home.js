@@ -4,15 +4,27 @@ import {Success} from "../components/Success.js";
 export const Home =
     `
     <div x-data x-show="$store.pages.isShowing('home')" id="homePageContainer" class="flex flex-col justify-evenly items-center">
+    
         <!-- barre esthétique à ajouter ici --> 
         
-        <!-- ajout de la height du header + son padding en y (170 + 16 = 186px) -->
-        <div class="flex justify-around pt-[186px] w-full">
-            <div>
-            <!-- ajouter les 4 cards (grid 2x2 : chaque élément à 460px * 276px) -->
+        <!-- div cards + rankboard -->
+        <div class="flex items-cst justify-evenly w-full h-2/3">
+            <!-- grid div --> 
+            <div class="grid grid-cols-2 w-[60%] h-full gap-2">
+                <!-- <div class="w-[460px] h-[276px] bg-[#3D225D] rounded-2xl"></div> -->
+                <div class="bg-[#3D225D] rounded-3xl"></div>
+                <div class="bg-[#3D225D] rounded-3xl"></div>
+                <div class="bg-[#3D225D] rounded-3xl"></div>
+                <div class="bg-[#3D225D] rounded-3xl"></div>
             </div>
-            ${RankBoard}
+            
+            <!-- rankboard div --> 
+            <div class="w-[30%]">
+                ${RankBoard}
+            </div>
         </div>
+
+        <!-- ${RankBoard} -->
         ${Success()}
     </div> 
 
