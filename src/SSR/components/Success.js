@@ -39,9 +39,15 @@ const SuccessItem = (id, name, game, imgPath) => {
 
 export const Success = () => {
     return `
-        <div class="flex gap-4 pt-[70px] w-full px-4 overscroll-x-auto">
-            ${success.map(s => SuccessItem(s.id, s.name, s.game, s.imgPath)).join('')}
+        <div class="flex flex-col items-center gap-1">
+            <h2>SUCCESS</h2>
+            
+            <!-- success list div --> 
+            <div class="flex gap-4 pt-[70px] w-full px-4 overscroll-x-auto">
+                ${success.map(s => SuccessItem(s.id, s.name, s.game, s.imgPath)).join('')}
+            </div>
         </div>
+
     `
 }
 
