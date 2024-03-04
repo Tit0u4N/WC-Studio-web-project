@@ -40,7 +40,7 @@ const SuccessItem = (id, name, game, imgPath) => {
 export const Success = () => {
     return `
         <div class="flex flex-col items-center gap-1">
-            <h2>SUCCESS</h2>
+            <h1>SUCCESS</h1>
             
             <!-- success list div --> 
             <div class="flex gap-4 pt-[70px] w-full px-4 overscroll-x-auto">
