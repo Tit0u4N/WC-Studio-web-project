@@ -3,7 +3,7 @@ import {Success} from "../components/Success.js";
 
 export const Home =
     `
-    <div x-data x-show="$store.pages.isShowing('home')" id="homePageContainer" class="flex flex-col gap-7 items-center">
+    <div x-data x-show="$store.pages.isShowing('home')" class="flex flex-col gap-7 items-center h-screen">
     
         <!-- barre esthétique à ajouter ici --> 
         
