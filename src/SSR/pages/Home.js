@@ -4,7 +4,7 @@ import {GameCard} from "../components/GameCard.js";
 
 export const Home =
     `
-    <div x-data x-show="$store.pages.isShowing('home')" class="flex flex-col gap-7 items-center h-screen">
+    <div x-data x-show="$store.pages.isShowing('home')" class="flex flex-col gap-7 items-center h-screen pr-3">
     
         <!-- barre esthétique à ajouter ici --> 
          
@@ -28,5 +28,4 @@ export const Home =
             ${Success()}
         </div>
     </div> 
-
     `
