@@ -105,11 +105,10 @@ export const Success = () => {
             <h1>SUCCESS</h1>
             
             <!-- success list div --> 
-            <div class="flex gap-4 pt-[70px] w-full px-4 overscroll-x-auto">
+            <div class="flex gap-4 pt-[70px] pb-5 w-full px-4 overflow-x-auto">
                 ${success.map(s => SuccessItem(s.id, s.name, s.game, s.imgPath)).join('')}
             </div>
         </div>
-
     `
 }
 

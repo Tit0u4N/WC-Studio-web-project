@@ -1,5 +1,6 @@
 import {RankBoard} from "../components/RankBoard.js";
 import {Success} from "../components/Success.js";
+import {GameCard} from "../components/GameCard.js";
 
 export const Home =
     `
@@ -10,12 +11,11 @@ export const Home =
         <!-- div cards + rankboard -->
         <div class="flex items-start justify-evenly w-full">
             <!-- grid div --> 
-            <div class="grid grid-cols-2 w-[60%] h-full gap-2">
-                <!-- <div class="w-[460px] h-[276px] bg-[#3D225D] rounded-2xl"></div> -->
-                <div class="bg-[#3D225D] rounded-3xl flex justify-center items-center text-white">Snake</div>
-                <div class="bg-[#3D225D] rounded-3xl flex justify-center items-center text-white">Memory</div>
-                <div class="bg-[#3D225D] rounded-3xl flex justify-center items-center text-white">Pong</div>
-                <div class="bg-[#3D225D] rounded-3xl flex justify-center items-center text-white">GamesOnWeb</div>
+            <div class="grid grid-cols-2 w-full h-full gap-2 px-3">
+                ${GameCard("Snake")}
+                ${GameCard("Memory")}
+                ${GameCard("Games On Web", "gow")}
+                ${GameCard("Pong (soon)", "pong", false)}
             </div>
             
             <!-- rankboard div --> 
@@ -24,7 +24,7 @@ export const Home =
             </div>
         </div>
         
-        <div class="pt-12 pb-6">
+        <div class="pt-12 pb-6 w-full">
             ${Success()}
         </div>
     </div> 
