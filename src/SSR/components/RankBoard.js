@@ -100,7 +100,8 @@ const renderPlayerTable = () => {
 
 
 export const RankBoard = `
-    <div x-data="${dataKey}" x-init="initPlayersData()" class="rankBoard container-style--hight w-1/4 mx-auto rounded-3xl border-2 ">
+    <div x-data="${dataKey}" x-init="initPlayersData()" class="div-under-rank-board rounded-3xl mx-auto">
+        <div class="rankBoard container-style--hight rounded-3xl w-full">
             <h1 class="font-bold text-center py-3">Rank</h1>
             ${renderFilter()}
             <div class="flex flex-col overflow-auto ">
@@ -108,6 +109,8 @@ export const RankBoard = `
                 ${renderPlayerTable()}
             </div>
             ${renderPlayerPagesNavigation()}
+        </div>
+
     </div>
 `;
 
