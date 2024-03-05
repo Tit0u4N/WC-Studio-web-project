@@ -5,6 +5,10 @@ export class ATHController {
         this.ATHView = null;
     }
 
+    getATHModel() {
+        return this.ATHModel;
+    }
+
     setView(ATHView) {
         this.ATHView = ATHView;
     }

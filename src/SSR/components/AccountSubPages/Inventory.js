@@ -4,8 +4,8 @@ export const Inventory = (id = "Inventory") => {
     return `
         <div>
             <h1 class="text-2xl font-bold mb-4">${id}</h1>
-            <div x-data="${dataKey}">
-                <template x-for="(game, indexgame) in getGames()" :key="game">
+            <div>
+                <template x-data="${dataKey}" x-for="(game, indexgame) in getGames()" :key="game">
                     <div class="mb-4 align-middle">
                     <div class="flex w-full items-center gap-2 mb-2">
                         <h2 class="text-lg font-semibold capitalize " x-text="game"></h2>

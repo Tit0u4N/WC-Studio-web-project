@@ -1,4 +1,6 @@
-export const Memory = `
+import {LayoutPage} from "../../layouts/LayoutPage.js";
+
+export const Memory = LayoutPage("game-memory", `
 <div id="memoryGameContainer" class="flex flex-col justify-center items-center">
     <div id="memory-control-panel" class="memory-control-panel container-style w-1/2 flex flex-col px-3 py-5 justify-center items-center mt-5 gap-2">
         <h1 class="text-center mb-3">Memory</h1>
@@ -28,5 +30,5 @@ export const Memory = `
     </div>
     <div class="memory-grid hidden"></div>
 </div>
-`
+`)
 
