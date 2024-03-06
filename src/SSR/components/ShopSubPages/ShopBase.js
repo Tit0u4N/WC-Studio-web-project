@@ -43,8 +43,6 @@ export const ShopBaseAlpineData = {
         owneds: {},
         notowned: {},
         isFiltered: false,
-
-
         init() {
             function pushIntoObject(obj, key, value) {
                 if (obj[key]) {
@@ -55,9 +53,7 @@ export const ShopBaseAlpineData = {
                     obj[key] = [value];
                 }
             }
-
             let stocks = this.$store.user.data.getItems();
-
             for (const key in stocks.games) {
                 for (const skin in stocks.games[key].skins) {
                     if (stocks.games[key].skins[skin].Own) {
@@ -70,10 +66,7 @@ export const ShopBaseAlpineData = {
             }
 
             this.getAllskins();
-
-
         },
-
         isOwned(gameKey, skinKey) {
             return this.owneds[gameKey].includes(skinKey);
         },

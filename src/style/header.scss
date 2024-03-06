@@ -1,6 +1,15 @@
 header {
   height: 170px;
 
+  .nav-elem {
+    border-radius: 15px;
+    background: transparent;
+
+    &:hover {
+      background: var(--Background-Hight-Plus);
+    }
+  }
+
   > nav {
     height: 85px;
 
@@ -27,6 +36,4 @@ header {
       }
     }
   }
-
-
 }

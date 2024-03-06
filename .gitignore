@@ -135,3 +135,8 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# pour les musiques
+
+public/assets/.DS_Store
+public/assets/musics/.DS_Store

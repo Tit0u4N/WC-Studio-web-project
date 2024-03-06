@@ -13,35 +13,39 @@ const USERDATA_DEFAULT = {
     ranking: [],
     success: [],
     items: {
+        games: {
+            snake: {
+                skins: {
+                    default: {
+                        Own: 1,
+                        Selected: 1,
+                        price: 100
 
-    games: {
-        snake: {
-            skins: {
-                default: {
-                    Own: 1,
-                    Selected: 1,
-                    price: 100
-
-                },
-                purple: {
-                    Own: 0,
-                    Selected: 0,
-                    price: 100
+                    },
+                    purple: {
+                        Own: 0,
+                        Selected: 0,
+                        price: 100
+                    },
+                    red: {
+                        Own: 0,
+                        Selected: 0,
+                        price: 100
+                    }
                 }
-            }
-        },
-        memory: {
-            skins: {
-                default: {
-                    Own: 1,
-                    Selected: 1,
-                    price: 100
+            },
+            memory: {
+                skins: {
+                    default: {
+                        Own: 1,
+                        Selected: 1,
+                        price: 100
+                    }
                 }
             }
         }
     }
 }
-
 
 export class UserData {
 
@@ -135,6 +139,10 @@ export class UserData {
     getRanking() {
         return this.ranking;
     }
+    setRanking(ranking, game) {
+        this.userDataJson.ranking[game] = ranking;
+        this.save();
+    }
 
     // Success
     getSuccess() {
@@ -145,11 +153,11 @@ export class UserData {
         this.userDataJson.success = success;
         this.save();
     }
+
     addSuccess(success) {
         this.userDataJson.success.push(success);
         this.save();
     }
-
 
 
     // Items
@@ -160,6 +168,18 @@ export class UserData {
     setItems(items) {
         this.userDataJson.items = items;
         this.save();
+    }
+
+    // Games
+    getSkinSelected(game) {
+        let gameSkins = this.userDataJson.items.games[game].skins;
+        for (const skin in gameSkins) {
+            if (gameSkins[skin].Selected) {
+                return skin;
+            }
+        }
+        return "default";
+
     }
 
     save() {

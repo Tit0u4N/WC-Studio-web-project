@@ -1,7 +1,7 @@
 import Snake from './Snake.js';
 import Food from './Food.js';
 import WallGenerator from './Wall.js';
-import Wall from './Wall.js';
+import {UserData} from "../../../../js/global/UserData.js";
 
 export default class Game {
     constructor(canvas, ctx) {
@@ -18,6 +18,8 @@ export default class Game {
         this.etatJeu = "mainMenu";
         this.gameInterval = null;
         this.wallGenerator = new WallGenerator(this.canvas, this.boxSize, this.snake, this.food, this.ctx, this.walls);
+        this.timeSinceEating = 0;
+        this.userData = UserData.getExistingUserData();
     }
 
     draw() {
@@ -41,6 +43,18 @@ export default class Game {
         }
     }
 
+    increaseScore() {
+        if (this.gameMode === "walls") {
+            this.score += 3;
+        }else if (this.gameMode === "shadow") {
+            this.score += 2;
+        }
+        else {
+            this.score++;
+        }
+        this.updateScore();
+    }
+
 
     update() {
         this.snake.move();
@@ -50,19 +64,22 @@ export default class Game {
         }
         if (this.snake.checkCollisionWithFood(this.food)) {
             this.food.generateFood();
-            this.score++;
-            this.updateScore();
             this.gestionOpacity(true);
+            this.timeSinceEating = 0;
         } else {
             this.gestionOpacity(false);
             this.snake.segments.pop();
+            this.timeSinceEating++;
+        }
+        // si on a rien mange depuis 1 minute je rajoute le succes "Did you read the rules?"
+        if (this.timeSinceEating === 300) {
+            this.userData.addSuccess(8);
         }
         this.draw();
         this.changingDirection = false;
     }
 
     resetGame() {
-
 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.score = 0;
@@ -120,6 +137,8 @@ export default class Game {
     GameOver() {
         alert("Game Over!");
         clearInterval(this.gameInterval);
+        this.userData.setRanking("snake", this.score);
+        this.userData.addMoney(this.score);
         this.score = 0;
         this.updateScore();
         this.resetGame();
@@ -140,8 +159,10 @@ export default class Game {
     decreaseOpacity() {
 
         this.ctx.globalAlpha -= 0.01;
-        if (this.ctx.globalAlpha < 0) {
+        if (this.ctx.globalAlpha <= 0.01) {
+            this.userData.addSuccess(12);
             this.GameOver();
+
         }
     }
 

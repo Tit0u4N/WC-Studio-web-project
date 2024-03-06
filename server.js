@@ -1,6 +1,5 @@
 import fs from 'node:fs/promises'
 import express from 'express'
-import {Memory} from "./src/SSR/games/memory/Memory.js";
 
 // Constants
 const isProduction = process.env.NODE_ENV === 'production'
@@ -54,11 +53,7 @@ const getRenderedTemplate = async (req) => {
         template = templateHtml
         entryServer = (await import('./dist/server/entry-server.js'))
     }
-    if (isGame(req)) {
-        rendered = entryServer.renderGame(req.originalUrl.replace('/game/', ''))
-    } else {
-        rendered = entryServer.render(req.originalUrl, ssrManifest)
-    }
+    rendered = entryServer.render(req.originalUrl, ssrManifest)
     return {rendered, template}
 }
 
