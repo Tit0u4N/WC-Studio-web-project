@@ -70,6 +70,8 @@ export class MainMemoryController {
                 }
                 break;
         }
+
+        userData.addMoney(Math.round(model.getPairs() * 40 / (timer + 1)));
     }
 
 }
