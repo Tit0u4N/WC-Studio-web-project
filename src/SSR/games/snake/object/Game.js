@@ -64,6 +64,7 @@ export default class Game {
         }
         if (this.snake.checkCollisionWithFood(this.food)) {
             this.food.generateFood();
+            this.increaseScore();
             this.gestionOpacity(true);
             this.timeSinceEating = 0;
         } else {
