@@ -97,7 +97,7 @@ export const ShopBaseAlpineData = {
                 this.notowned[game].splice(this.notowned[game].indexOf(skin), 1);
 
             } else {
-                this.$store.user.data.addSuccess('Not enough money');
+                this.$store.user.data.addSuccess(13);
                 alert('Not enough money')
             }
         },

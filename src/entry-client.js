@@ -25,7 +25,7 @@ Alpine.store('user', {
 });
 
 Alpine.store('pages', {
-    pages: ['home', 'login', 'account', 'shop', 'game'],
+    pages: ['home', 'login', 'account', 'shop', 'game', "404"],
     games: ['memory', 'snake', 'gow'],
     showing: "",
     isShowing(page) {
@@ -34,6 +34,7 @@ Alpine.store('pages', {
     getPageByURL() {
         const path = window.location.pathname.split('/')[1];
         if (this.pages.includes(path)) return path;
+        if (window.location.pathname === '/' || window.location.pathname === '') return 'home';
         return '404';
     },
     isPage(page) {
@@ -42,20 +43,25 @@ Alpine.store('pages', {
     isGame(game) {
         return this.games.includes(game);
     },
-    async set(page) {
-        if (!this.isPage(page)) return;
+    async set(path) {
+        const page = path.split('/')[0]
         if (this.showing === page) return;
-        if (page === 'account' && !Alpine.store('user').isConnected()){
-            return;
-        }
-        if (page === 'game') {
-            const game = window.location.pathname.split('/')[2];
-            if (this.isGame(game)) {
-                await import(`./SSR/games/${game}/main.js`)
+        if (this.isPage(page)) {
+            if (page === 'game') {
+                const game = path.split('/')[1];
+                if (this.isGame(game)) {
+                    await import(`./SSR/games/${game}/main.js`)
+                    this.showing = "game-"+game;
+                    return;
+                }
             }
-            this.showing = "game-"+game;
+            if (page === 'account' && !Alpine.store('user').isConnected()){
+
+            } else {
+                this.showing = page;
+            }
         } else {
-            this.showing = page;
+            this.showing = "404";
         }
     },
 });
