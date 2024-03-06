@@ -9,21 +9,6 @@ import {GamesInventoryAlpineData} from "./SSR/components/AccountSubPages/Invento
 import {ShopAlpineData} from "./SSR/pages/Shop.js";
 import {ShopBaseAlpineData} from "./SSR/components/ShopSubPages/ShopBase.js";
 
-const getPageByURL = () => {
-    const path = window.location.pathname.replace('/', '');
-    switch (path) {
-        case 'login':
-            return 'login';
-        case 'account':
-            return 'account';
-        case 'shop':
-            return 'shop';
-        default:
-            return 'home';
-    }
-};
-
-
 Alpine.store('user', {
     data: UserData.getExistingUserData(),
     update() {
@@ -40,33 +25,78 @@ Alpine.store('user', {
 });
 
 Alpine.store('pages', {
-    showing: getPageByURL(),
+    pages: ['home', 'login', 'account', 'shop', 'game'],
+    games: ['memory', 'snake', 'gow'],
+    showing: "",
     isShowing(page) {
         return this.showing === page;
     },
-    set(page) {
+    getPageByURL() {
+        const path = window.location.pathname.split('/')[1];
+        if (this.pages.includes(path)) return path;
+        return '404';
+    },
+    isPage(page) {
+        return this.pages.includes(page);
+    },
+    isGame(game) {
+        return this.games.includes(game);
+    },
+    async set(page) {
+        if (!this.isPage(page)) return;
         if (this.showing === page) return;
         if (page === 'account' && !Alpine.store('user').isConnected()){
             return;
         }
-        this.showing = page;
+        if (page === 'game') {
+            const game = window.location.pathname.split('/')[2];
+            if (this.isGame(game)) {
+                await import(`./SSR/games/${game}/main.js`)
+            }
+            this.showing = "game-"+game;
+        } else {
+            this.showing = page;
+        }
     },
+});
+
+Alpine.store('music', {
+    player: null,
+    isPlaying: null,
+    init() {
+        this.player = document.getElementById("backgroundMusic");
+        this.setVolume(0.5);
+        this.isPlaying = false;
+    },
+    start() {
+        this.player.play();
+        this.isPlaying = true;
+    },
+    pause() {
+        this.player.pause();
+        this.isPlaying = false;
+    },
+    setVolume(newVolume){
+        this.player.volume = newVolume;
+    }
 });
 
 Alpine.data(LoginAlpineData.dataKey, LoginAlpineData.data);
 Alpine.data(AccountAlpineData.dataKey, AccountAlpineData.data);
 Alpine.data(RankBoardAlpineData.dataKey, RankBoardAlpineData.data);
 Alpine.data(GamesInventoryAlpineData.dataKey, GamesInventoryAlpineData.data);
-
 Alpine.data(ShopAlpineData.dataKey, ShopAlpineData.data);
-
-
-
 Alpine.data(AlpineSuccessData.dataKey, AlpineSuccessData.data);
+Alpine.data(ShopBaseAlpineData.dataKey, ShopBaseAlpineData.data);
+
 window.addEventListener('alpine:init', () => {
     if (UserData.getExistingUserData().isNewUserData()) {
         Alpine.store('pages').set('login');
+    } else {
+        Alpine.store('pages').set(Alpine.store('pages').getPageByURL());
     }
+
+    Alpine.store('music').init()
 
     setTimeout(() => {
         document.getElementById("pageLoader").classList.toggle("!hidden", true);
