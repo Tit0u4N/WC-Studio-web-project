@@ -2,8 +2,6 @@ const dataKey = "GamesShop";
 export const ShopBase = (id = "shopbase") => {
     return `
         <div>
-            <h1class="text-2xl font-bold mb-4">${id}</h1>
-            
             <div x-data="${dataKey}">
             <label class="inline-flex items-center cursor-pointer">
                 <input type="checkbox" x-on:change="toggleOwnedFilter" class="sr-only peer">

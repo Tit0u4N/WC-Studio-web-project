@@ -25,7 +25,7 @@ Alpine.store('user', {
 });
 
 Alpine.store('pages', {
-    pages: ['home', 'login', 'account', 'shop', 'game'],
+    pages: ['home', 'login', 'account', 'shop', 'game', "404"],
     games: ['memory', 'snake', 'gow'],
     showing: "",
     isShowing(page) {
@@ -33,7 +33,8 @@ Alpine.store('pages', {
     },
     getPageByURL() {
         const path = window.location.pathname.split('/')[1];
-        if (this.pages.includes(path)) return path;
+        if (this.pages.includes(path)) return window.location.pathname;
+        if (window.location.pathname === '/' || window.location.pathname === '') return 'home';
         return '404';
     },
     isPage(page) {
@@ -42,20 +43,34 @@ Alpine.store('pages', {
     isGame(game) {
         return this.games.includes(game);
     },
-    async set(page) {
-        if (!this.isPage(page)) return;
-        if (this.showing === page) return;
-        if (page === 'account' && !Alpine.store('user').isConnected()){
-            return;
+    setShowing(page) {
+        this.showing = page;
+        document.title = `WC Studio - ${page}`;
+    },
+    async set(path) {
+        path = path.split('/')
+        if (path.length > 1 && path[0] === "") {
+            path = path.splice(1)
         }
-        if (page === 'game') {
-            const game = window.location.pathname.split('/')[2];
-            if (this.isGame(game)) {
-                await import(`./SSR/games/${game}/main.js`)
+        const page = path[0];
+        if (this.showing === page) return;
+        if (this.isPage(page)) {
+            if (page === 'game') {
+                const game = path[1];
+                if (this.isGame(game)) {
+                    await import(`./SSR/games/${game}/main.js`)
+                    this.showing = "game-"+game;
+                    document.title = `WC Studio - ${game}`;
+                    return;
+                }
             }
-            this.showing = "game-"+game;
+            if (page === 'account' && !Alpine.store('user').isConnected()){
+
+            } else {
+                this.setShowing(page);
+            }
         } else {
-            this.showing = page;
+            this.setShowing("404")
         }
     },
 });
