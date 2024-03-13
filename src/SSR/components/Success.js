@@ -46,31 +46,31 @@ const success = [
         id: 8,
         name: "Did you read the rules?",
         game: "snake",
-        imgPath: "success-icon.png",
+        imgPath: "DidYouReadTheRules.png",
     },
     {
         id: 9,
         name: "You're not eatable",
         game: "snake",
-        imgPath: "success-icon.png",
+        imgPath: "YouNotEatable.png",
     },
     {
         id: 10,
         name: "OUCH! That hurts!",
         game: "snake",
-        imgPath: "success-icon.png",
+        imgPath: "ThatHurt.png",
     },
     {
         id: 11,
         name: "Why are you running?",
         game: "snake",
-        imgPath: "success-icon.png",
+        imgPath: "ThatHurt.png",
     },
     {
         id: 12,
         name: "Where are a you",
         game: "snake",
-        imgPath: "success-icon.png",
+        imgPath: "WhereAreYou.png",
     },
     {
         id: 13,
@@ -87,8 +87,8 @@ const SuccessItem = (id, name, game, imgPath) => {
     return `
     <div>
         <div x-data="${alpinDataKey}" class="success-background flex flex-col justify-center items-center overflow-visible rounded-lg">
-            <div :class="isUnlocked(${id}) ? 'isUnlocked' : ''" class="success-image-container h-[80px] w-2/3 rounded-full border-4">
-                <img src="../../../public/assets/images/${imgPath}" alt="succes-icon" class="mx-auto p-2">
+            <div :class="isUnlocked(${id}) ? 'isUnlocked' : ''" class="success-image-container h-full w-2/3 rounded-full border-4">
+                <img src="../../../public/assets/succes/${imgPath}" alt="succes-icon" class="mx-auto p-2">
             </div>
             <div  class="flex flex-col justify-evenly items-center h-2/3">
                 <p class="success-name-text font-light text-slate-50 text-center">${name}</p>
