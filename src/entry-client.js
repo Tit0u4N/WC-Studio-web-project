@@ -33,7 +33,7 @@ Alpine.store('pages', {
     },
     getPageByURL() {
         const path = window.location.pathname.split('/')[1];
-        if (this.pages.includes(path)) return path;
+        if (this.pages.includes(path)) return window.location.pathname;
         if (window.location.pathname === '/' || window.location.pathname === '') return 'home';
         return '404';
     },
@@ -43,25 +43,34 @@ Alpine.store('pages', {
     isGame(game) {
         return this.games.includes(game);
     },
+    setShowing(page) {
+        this.showing = page;
+        document.title = `WC Studio - ${page}`;
+    },
     async set(path) {
-        const page = path.split('/')[0]
+        path = path.split('/')
+        if (path.length > 1 && path[0] === "") {
+            path = path.splice(1)
+        }
+        const page = path[0];
         if (this.showing === page) return;
         if (this.isPage(page)) {
             if (page === 'game') {
-                const game = path.split('/')[1];
+                const game = path[1];
                 if (this.isGame(game)) {
                     await import(`./SSR/games/${game}/main.js`)
                     this.showing = "game-"+game;
+                    document.title = `WC Studio - ${game}`;
                     return;
                 }
             }
             if (page === 'account' && !Alpine.store('user').isConnected()){
 
             } else {
-                this.showing = page;
+                this.setShowing(page);
             }
         } else {
-            this.showing = "404";
+            this.setShowing("404")
         }
     },
 });

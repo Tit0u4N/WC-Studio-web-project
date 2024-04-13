@@ -19,7 +19,7 @@ export const Memory = LayoutPage("game-memory", `
     </div>
     <div id="memory-ath" class="container-style flex justify-between items-center w-1/2 h-[100px] px-4 hidden m-5">
         <div><h3 class="mb-1">Moves</h3><p class="text-center" id="memory-moves">0</p></div>
-        <div><h3 class="mb-1">Timer</h3><p class="text-center" id="memory-timer">0</p></div>
+        <div><h3 class="mb-1">Timer</h3><p class="text-center" id="memory-timer">0</p></div>    
         <div><h3 class="mb-1">Pairs</h3><p class="text-center" id="memory-pairs">0</p></div>
     </div>
     
