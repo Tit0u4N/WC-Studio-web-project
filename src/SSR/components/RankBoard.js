@@ -124,8 +124,8 @@ export const RankBoardAlpineData = { dataKey, data : () => ({
             this.games.forEach(game => {
                 if (userRanking[game]) {
                     tempRanking.push(game);
-                    score += userRanking[game].score;
-                    success += userRanking[game].success;
+                    score += this.$store.user.data.getScore(game);
+                    success += this.$store.user.data.getNumberOfSuccess(game);
                 } else {
                     tempRanking.push(game);
                     userRanking[game] = {

@@ -12,6 +12,7 @@ const USERDATA_DEFAULT = {
     },
     ranking: [],
     success: [],
+    score: {},
     items: {
         games: {
             snake: {
@@ -149,6 +150,10 @@ export class UserData {
         return this.success;
     }
 
+    getNumberOfSuccess(game) {
+        return this.userDataJson.success.filter(s => s.game === game).length;
+    }
+
     setSuccess(success) {
         this.userDataJson.success = success;
         this.save();
@@ -157,6 +162,23 @@ export class UserData {
     addSuccess(success) {
         this.userDataJson.success.push(success);
         this.save();
+    }
+
+    // Score
+
+    addScore(game, score) {
+        if (!this.userDataJson.score[game]) {
+            this.userDataJson.score[game] = score;
+        }
+        if (this.userDataJson.score[game] < score) {
+            this.userDataJson.score[game] = score;
+        }
+        this.save();
+
+    }
+
+    getScore(game) {
+        return this.userDataJson.score[game];
     }
 
 

@@ -136,10 +136,10 @@ export default class Game {
     }
 
     GameOver() {
-        alert("Game Over!");
         clearInterval(this.gameInterval);
         this.userData.setRanking("snake", this.score);
         this.userData.addMoney(this.score);
+        this.userData.addScore("snake", this.score);
         this.score = 0;
         this.updateScore();
         this.resetGame();
