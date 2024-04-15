@@ -98,3 +98,22 @@ p, span,a {
   box-shadow: 0px 1px 4px var(--HighLight-2), 0px -1px 4px var(--HighLight-1);
 }
 
+.div-under-login-button {
+  padding: 2px !important;
+  background: var(--VGradient-red-to-blue);
+  width: 100vh;
+  // blur à laisser ?
+  box-shadow: 0px 2px 5px var(--HighLight-2), 0px -2px 5px var(--HighLight-1);
+
+  &:hover {
+    background: var(--VGradient-blue-to-red) !important;
+    box-shadow: 0px 2px 5px var(--HighLight-1), 0px -2px 5px var(--HighLight-2) !important;
+
+  }
+
+  &:focus {
+    background: var(--VGradient-red-to-blue);
+  }
+}
+
+
