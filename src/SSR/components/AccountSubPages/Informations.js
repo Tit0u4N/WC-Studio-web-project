@@ -1,5 +1,6 @@
 import {FormField} from "../FormField.js";
 import {NeonHeaderBar} from "../NeonHeaderBar.js";
+import {ButtonHover} from "../ButtonHover.js";
 
 export const Informations = (id = "Informations") => {
     return `
@@ -17,6 +18,10 @@ export const Informations = (id = "Informations") => {
             
             ${FormField("Password", "****************")}
             ${FormField("Confirm Password", "****************")}
+
+            <div class="">
+                <!-- ${ButtonHover('Save', {alpineProps: 'x-on:click="nomFonction"'})} -->
+            </div>
             
         </div>
     `
