@@ -46,6 +46,7 @@ Alpine.store('pages', {
     setShowing(page) {
         this.showing = page;
         document.title = `WC Studio - ${page}`;
+        Alpine.store('user').update();
     },
     async set(path) {
         path = path.split('/')
