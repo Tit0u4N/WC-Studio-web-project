@@ -40,7 +40,6 @@ export class MainMemoryController {
         if (mode in GameMode) {
             this.gameMode = mode;
         }
-        UserData.getExistingUserData().addSuccess(5);
     }
 
     endGame() {
