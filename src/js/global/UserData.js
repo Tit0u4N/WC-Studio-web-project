@@ -1,3 +1,5 @@
+import {success} from "../../SSR/components/Success.js";
+
 export const KEY_USERDATA_LOCALSTORAGE = "userData-WC-Studio"
 
 const USERDATA_DEFAULT = {
@@ -10,7 +12,7 @@ const USERDATA_DEFAULT = {
         musicEnable: true,
         soundEnable: true,
     },
-    ranking: [],
+    ranking: {},
     success: [],
     items: {
         games: {
@@ -48,6 +50,7 @@ const USERDATA_DEFAULT = {
 }
 
 export class UserData {
+    static AlpineJs;
 
     static getExistingUserData() {
         if (localStorage.getItem(KEY_USERDATA_LOCALSTORAGE)) {
@@ -139,9 +142,11 @@ export class UserData {
     getRanking() {
         return this.ranking;
     }
-    setRanking(ranking, game) {
-        this.userDataJson.ranking[game] = ranking;
+
+    setRanking(game, ranking) {
+        this.userDataJson.ranking[game.toLowerCase()].score = ranking;
         this.save();
+
     }
 
     // Success
@@ -154,8 +159,19 @@ export class UserData {
         this.save();
     }
 
-    addSuccess(success) {
-        this.userDataJson.success.push(success);
+    addSuccess(succes) {
+        if (this.userDataJson.success.includes(succes)) {
+            return;
+        }
+        this.userDataJson.success.push(succes);
+
+        // get game from success id
+
+        let gameSucces =success.find(s => s.id === succes).game
+        if (gameSucces) {
+            this.userDataJson.ranking[gameSucces].success += 1;
+        }
+
         this.save();
     }
 
@@ -184,6 +200,11 @@ export class UserData {
 
     save() {
         localStorage.setItem(KEY_USERDATA_LOCALSTORAGE, JSON.stringify(this.userDataJson));
+        if (UserData.AlpineJs) {
+            UserData.AlpineJs.store('user').update();
+        }
+
+
     }
 
     reset() {

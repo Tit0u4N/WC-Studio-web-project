@@ -1,6 +1,8 @@
+import {UserData} from "../../js/global/UserData.js";
+
 const dataKey = 'rankBoard';
 
-const games = ["Memory", "Snake"];
+const games = ["memory", "snake"];
 
 const playerRow = (index) => {
     return `
@@ -103,6 +105,7 @@ export const RankBoard = `
     <div x-data="${dataKey}" x-init="initPlayersData()" class="div-under-rank-board rounded-3xl mx-auto">
         <div class="rankBoard container-style--hight rounded-3xl w-full">
             <h1 class="font-bold text-center py-3">Rank</h1>
+            <button x-on:click="updateUserData()">Update</button>
             ${renderFilter()}
             <div class="flex flex-col overflow-auto ">
                 ${renderHeaderTable()}
@@ -117,7 +120,7 @@ export const RankBoard = `
 
 export const RankBoardAlpineData = { dataKey, data : () => ({
         initUserData() {
-            const userRanking = this.$store.user.data.getRanking();
+            const userRanking = UserData.getExistingUserData().getRanking();
             let score = 0;
             let success = 0;
             const tempRanking = [];
@@ -135,11 +138,27 @@ export const RankBoardAlpineData = { dataKey, data : () => ({
                 }
             })
             this.playersData.push({
-                name: this.$store.user.data.getUsername(),
+                isRealPlayer: true,
+                name: UserData.getExistingUserData().getUsername(),
                 score,
                 success,
                 game: userRanking
             })
+        },
+        updateUserData() {
+            const userRanking = UserData.getExistingUserData().getRanking();
+            let player = this.playersData.find(player => player.isRealPlayer);
+            let score = 0;
+            let success = 0;
+            for (let game in userRanking) {
+                if (userRanking[game]) {
+                    score += userRanking[game].score;
+                    success += userRanking[game].success;
+                }
+            }
+            player.score = score;
+            player.success = success;
+
         },
         initPlayersData() {
             for (let i = 0; i < 25; i++) {
@@ -151,8 +170,8 @@ export const RankBoardAlpineData = { dataKey, data : () => ({
                 });
                 for (let j = 0; j < this.games.length; j++) {
                     this.playersData[i].game[this.games[j]] = {
-                        score: Math.floor(Math.random() * 1000),
-                        success: Math.floor(Math.random() * 10)
+                        score: Math.floor(Math.random() * 100),
+                        success: Math.floor(Math.random() * 5)
                     }
                     this.playersData[i].score += this.playersData[i].game[this.games[j]].score;
                     this.playersData[i].success += this.playersData[i].game[this.games[j]].success;

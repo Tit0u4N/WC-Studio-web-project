@@ -105,6 +105,8 @@ Alpine.data(ShopAlpineData.dataKey, ShopAlpineData.data);
 Alpine.data(AlpineSuccessData.dataKey, AlpineSuccessData.data);
 Alpine.data(ShopBaseAlpineData.dataKey, ShopBaseAlpineData.data);
 
+UserData.AlpineJs = Alpine;
+
 window.addEventListener('alpine:init', () => {
     if (UserData.getExistingUserData().isNewUserData()) {
         Alpine.store('pages').set('login');

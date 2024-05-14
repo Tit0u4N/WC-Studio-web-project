@@ -1,3 +1,5 @@
+import {UserData} from "../../../js/global/UserData.js";
+
 const dataKey = "GamesInventory";
 
 export const Inventory = (id = "Inventory") => {
@@ -39,7 +41,7 @@ export const GamesInventoryAlpineData = {
         selectedGames: {},
 
         init() {
-            let stocks = this.$store.user.data.getItems();
+            let stocks = UserData.getExistingUserData().getItems();
 
             for (const key in stocks.games) {
                 for (const skin in stocks.games[key].skins) {
@@ -61,11 +63,11 @@ export const GamesInventoryAlpineData = {
             }
         },
         selectGameSkin(gameKey, skinKey) {
-            let stocks = this.$store.user.data.getItems();
+            let stocks = UserData.getExistingUserData().getItems();
             stocks.games[gameKey].skins[skinKey].Selected = 1;
             let previousSkin = this.selectedGames[gameKey];
             stocks.games[gameKey].skins[previousSkin].Selected = 0;
-            this.$store.user.data.setItems(stocks);
+            UserData.getExistingUserData().setItems(stocks);
             this.selectedGames[gameKey] = skinKey;
             this.init();
 

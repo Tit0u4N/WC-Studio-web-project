@@ -4,12 +4,10 @@ export default class Snake {
     constructor(ctx, canvas, boxSize) {
         this.segments = [{x: 5, y: 5}, {x: 4, y: 5}];
         this.direction = "right";
-        this.userData = UserData.getExistingUserData();
-        this.skin = this.userData.getSkinSelected("snake");
+        this.skin = UserData.getExistingUserData().getSkinSelected("snake");
         this.ctx = ctx;
         this.canvas = canvas;
         this.boxSize = boxSize;
-        this.userData = UserData.getExistingUserData();
 
         // Define default colors
         this.headAsset = '/assets/games/snake/themes/'+this.skin+'/head.png';
@@ -89,7 +87,7 @@ export default class Snake {
     checkCollisionWithSelf() {
         let collision = this.segments.slice(1).some(segment => segment.x === this.segments[0].x && segment.y === this.segments[0].y);
         if (collision) {
-            this.userData.addSuccess(9)
+            UserData.getExistingUserData().addSuccess(9)
         }
         return collision;
     }
@@ -103,7 +101,7 @@ export default class Snake {
             }
         });
         if (collision) {
-            this.userData.addSuccess(10)
+            UserData.getExistingUserData().addSuccess(10)
         }
         return collision;
     }
@@ -115,7 +113,7 @@ export default class Snake {
     checkCollisionWithOutOfBounds(canvas) {
         let collision = this.segments[0].x < 0 || this.segments[0].x >= canvas.width / this.boxSize || this.segments[0].y < 0 || this.segments[0].y >= canvas.height / this.boxSize;
         if (collision) {
-            this.userData.addSuccess(11)
+            UserData.getExistingUserData().addSuccess(11)
         }
         return collision;
     }

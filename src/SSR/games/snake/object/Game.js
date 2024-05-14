@@ -19,7 +19,6 @@ export default class Game {
         this.gameInterval = null;
         this.wallGenerator = new WallGenerator(this.canvas, this.boxSize, this.snake, this.food, this.ctx, this.walls);
         this.timeSinceEating = 0;
-        this.userData = UserData.getExistingUserData();
     }
 
     draw() {
@@ -74,7 +73,7 @@ export default class Game {
         }
         // si on a rien mange depuis 1 minute je rajoute le succes "Did you read the rules?"
         if (this.timeSinceEating === 300) {
-            this.userData.addSuccess(8);
+            UserData.getExistingUserData().addSuccess(8);
         }
         this.draw();
         this.changingDirection = false;
@@ -137,8 +136,8 @@ export default class Game {
 
     GameOver() {
         clearInterval(this.gameInterval);
-        this.userData.setRanking("snake", this.score);
-        this.userData.addMoney(this.score);
+        UserData.getExistingUserData().setRanking("snake", this.score);
+        UserData.getExistingUserData().addMoney(this.score);
         this.score = 0;
         this.updateScore();
         this.resetGame();
@@ -160,7 +159,7 @@ export default class Game {
 
         this.ctx.globalAlpha -= 0.01;
         if (this.ctx.globalAlpha <= 0.01) {
-            this.userData.addSuccess(12);
+            UserData.getExistingUserData().addSuccess(12);
             this.GameOver();
 
         }

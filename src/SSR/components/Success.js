@@ -1,4 +1,6 @@
-const success = [
+import {UserData} from "../../js/global/UserData.js";
+
+export const success = [
     {
         id: 1,
         name: "First Game",
@@ -116,7 +118,7 @@ export const AlpineSuccessData = {
     dataKey: alpinDataKey,
     data: () => ({
         isUnlocked(id) {
-            return this.$store.user.data.getSuccess().includes(id)
+            return UserData.getExistingUserData().getSuccess().includes(id)
         }
     })
 }

@@ -1,3 +1,5 @@
+import {UserData} from "../../../js/global/UserData.js";
+
 const dataKey = "GamesShop";
 export const ShopBase = (id = "shopbase") => {
     return `
@@ -53,7 +55,7 @@ export const ShopBaseAlpineData = {
                     obj[key] = [value];
                 }
             }
-            let stocks = this.$store.user.data.getItems();
+            let stocks = UserData.getExistingUserData().getItems();
             for (const key in stocks.games) {
                 for (const skin in stocks.games[key].skins) {
                     if (stocks.games[key].skins[skin].Own) {
@@ -77,25 +79,25 @@ export const ShopBaseAlpineData = {
             return this.games[game];
         },
         getSkinPrice(gameKey, skinKey) {
-            let stocks = this.$store.user.data.getItems();
+            let stocks = UserData.getExistingUserData().getItems();
             return stocks.games[gameKey].skins[skinKey].price;
         },
         buySkin(game, skin) {
             if (this.owneds[game].includes(skin)) {
                 return;
             }
-            let stocks = this.$store.user.data.getItems();
+            let stocks = UserData.getExistingUserData().getItems();
             let price = stocks.games[game].skins[skin].price;
             let money = this.$store.user.getMoney();
             if (money >= price) {
-                this.$store.user.data.removeMoney(price);
+                UserData.getExistingUserData().removeMoney(price);
                 stocks.games[game].skins[skin].Own = 1;
-                this.$store.user.data.setItems(stocks);
+                UserData.getExistingUserData().setItems(stocks);
                 this.owneds[game].push(skin);
                 this.notowned[game].splice(this.notowned[game].indexOf(skin), 1);
 
             } else {
-                this.$store.user.data.addSuccess(13);
+                UserData.getExistingUserData().addSuccess(13);
                 alert('Not enough money')
             }
         },
