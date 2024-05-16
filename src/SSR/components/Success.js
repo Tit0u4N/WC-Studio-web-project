@@ -78,7 +78,7 @@ export const success = [
         id: 13,
         name: "Not enough money",
         game: "Shop",
-        imgPath: "success-icon.png"
+        imgPath: "Notenoughmoney.png"
     }
 
 ]
