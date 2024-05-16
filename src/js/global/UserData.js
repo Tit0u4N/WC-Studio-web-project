@@ -139,6 +139,10 @@ export class UserData {
     getRanking() {
         return this.ranking;
     }
+    setRanking(ranking, game) {
+        this.userDataJson.ranking[game] = ranking;
+        this.save();
+    }
 
     // Success
     getSuccess() {

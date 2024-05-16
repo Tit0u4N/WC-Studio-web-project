@@ -43,6 +43,18 @@ export default class Game {
         }
     }
 
+    increaseScore() {
+        if (this.gameMode === "walls") {
+            this.score += 3;
+        }else if (this.gameMode === "shadow") {
+            this.score += 2;
+        }
+        else {
+            this.score++;
+        }
+        this.updateScore();
+    }
+
 
     update() {
         this.snake.move();
@@ -52,8 +64,7 @@ export default class Game {
         }
         if (this.snake.checkCollisionWithFood(this.food)) {
             this.food.generateFood();
-            this.score++;
-            this.updateScore();
+            this.increaseScore();
             this.gestionOpacity(true);
             this.timeSinceEating = 0;
         } else {
@@ -70,7 +81,6 @@ export default class Game {
     }
 
     resetGame() {
-
 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.score = 0;
@@ -128,6 +138,8 @@ export default class Game {
     GameOver() {
         alert("Game Over!");
         clearInterval(this.gameInterval);
+        this.userData.setRanking("snake", this.score);
+        this.userData.addMoney(this.score);
         this.score = 0;
         this.updateScore();
         this.resetGame();
