@@ -172,6 +172,26 @@ export class UserData {
             this.userDataJson.ranking[gameSucces].success += 1;
         }
 
+
+        let gameSuccessOne = success.find(s => s.id === 1).game
+        if (gameSucces === gameSuccessOne) {
+            this.userDataJson.ranking[gameSucces].success += 1;
+            this.userDataJson.success.push(1);
+        }
+
+
+        let gameSuccessTwo = success.find(s => s.id === 2).game
+        if (gameSucces === gameSuccessTwo) {
+            this.userDataJson.ranking[gameSucces].success += 1;
+            this.userDataJson.success.push(2);
+        }
+
+
+        if (this.userDataJson.success.includes(1) && this.userDataJson.success.includes(2)) {
+            this.userDataJson.success.push(3);
+        }
+
+
         this.save();
     }
 
