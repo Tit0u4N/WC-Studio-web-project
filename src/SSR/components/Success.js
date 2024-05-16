@@ -3,21 +3,21 @@ import {UserData} from "../../js/global/UserData.js";
 export const success = [
     {
         id: 1,
-        name: "First Game",
-        game: "Game 1",
-        imgPath: "success-icon.png",
+        name: "Memory Starter",
+        game: "memory",
+        imgPath: "memorycover.png",
     },
     {
         id: 2,
-        name: "Second Game",
-        game: "Game 2",
-        imgPath: "success-icon.png",
+        name: "Snake Starter",
+        game: "snake",
+        imgPath: "snakecover.png",
     },
     {
         id: 3,
-        name: "Third Game",
-        game: "Game 3",
-        imgPath: "success-icon.png",
+        name: "Game Starter",
+        game: "memory & snake",
+        imgPath: "covergames.png",
     },
     {
         id: 4,
