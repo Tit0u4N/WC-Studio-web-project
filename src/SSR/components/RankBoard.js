@@ -105,7 +105,6 @@ export const RankBoard = `
     <div x-data="${dataKey}" x-init="initPlayersData()" class="div-under-rank-board rounded-3xl mx-auto">
         <div class="rankBoard container-style--hight rounded-3xl w-full">
             <h1 class="font-bold text-center py-3">Rank</h1>
-            <button x-on:click="updateUserData()">Update</button>
             ${renderFilter()}
             <div class="flex flex-col overflow-auto ">
                 ${renderHeaderTable()}
