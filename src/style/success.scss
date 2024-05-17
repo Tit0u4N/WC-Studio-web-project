@@ -1,7 +1,7 @@
 .success{
   &-background{
     width: 120px;
-    height: 80px;
+    height: 90px;
     background-color: var(--Background-Hight)
   }
 
@@ -16,6 +16,7 @@
 
   &-name-text{
     font-size: small;
+    line-height: 0.9;
   }
 
   &-game-name-text{

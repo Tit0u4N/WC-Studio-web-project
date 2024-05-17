@@ -1,6 +1,9 @@
+import {UserData} from "../../../../js/global/UserData.js";
+
 export class CardView {
     static flippedClass = ['flip-right', 'flip-left', 'flip-up', 'flip-down', 'flip-diagonal-right', 'flip-diagonal-left', 'flip-inverted-diagonal-right', 'flip-inverted-diagonal-left']
     static flippedAnimDuration = 500;
+    static THEME = CardView.getTheme();
     constructor(cardModel, gridController) {
         this.cardModel = cardModel;
         this.type = cardModel.type;
@@ -35,7 +38,18 @@ export class CardView {
     }
 
     getImgURL() {
-        return `/assets/games/memory/themes/default/card-${this.type}.webp`
+        return `/assets/games/memory/themes/${CardView.THEME}/card-${this.type}.webp`
+    }
+    static getTheme() {
+        const user = UserData.getExistingUserData();
+        const skins = user.getItems().games.memory.skins;
+        let theme = "default";
+        Object.keys(skins).forEach(skin => {
+            if (skins[skin].Selected) {
+                theme = skin;
+            }
+        });
+        return theme;
     }
 
     toggleShowImg(show) {

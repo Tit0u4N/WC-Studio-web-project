@@ -1,3 +1,5 @@
+import {success} from "../../SSR/components/Success.js";
+
 export const KEY_USERDATA_LOCALSTORAGE = "userData-WC-Studio"
 
 const USERDATA_DEFAULT = {
@@ -10,36 +12,45 @@ const USERDATA_DEFAULT = {
         musicEnable: true,
         soundEnable: true,
     },
-    ranking: [],
+    ranking: {},
     success: [],
     items: {
-    games: {
-        snake: {
-            skins: {
-                default: {
-                    Own: 1,
-                    Selected: 1
-                },
-                purple: {
-                    Own: 1,
-                    Selected: 0
+        games: {
+            snake: {
+                skins: {
+                    default: {
+                        Own: 1,
+                        Selected: 1,
+                        price: 100
+
+                    },
+                    purple: {
+                        Own: 0,
+                        Selected: 0,
+                        price: 100
+                    },
+                    red: {
+                        Own: 0,
+                        Selected: 0,
+                        price: 100
+                    }
                 }
-            }
-        },
-        memory: {
-            skins: {
-                default: {
-                    Own: 1,
-                    Selected: 1
+            },
+            memory: {
+                skins: {
+                    default: {
+                        Own: 1,
+                        Selected: 1,
+                        price: 100
+                    }
                 }
             }
         }
     }
 }
 
-}
-
 export class UserData {
+    static AlpineJs;
 
     static getExistingUserData() {
         if (localStorage.getItem(KEY_USERDATA_LOCALSTORAGE)) {
@@ -132,10 +143,58 @@ export class UserData {
         return this.ranking;
     }
 
+    setRanking(game, ranking) {
+        this.userDataJson.ranking[game.toLowerCase()].score = ranking;
+        this.save();
+
+    }
+
     // Success
     getSuccess() {
         return this.success;
     }
+
+    setSuccess(success) {
+        this.userDataJson.success = success;
+        this.save();
+    }
+
+    addSuccess(succes) {
+        if (this.userDataJson.success.includes(succes)) {
+            return;
+        }
+        this.userDataJson.success.push(succes);
+
+        // get game from success id
+
+        let gameSucces =success.find(s => s.id === succes).game
+        if (gameSucces) {
+            this.userDataJson.ranking[gameSucces].success += 1;
+        }
+
+
+        let gameSuccessOne = success.find(s => s.id === 1).game
+        if (gameSucces === gameSuccessOne) {
+            this.userDataJson.ranking[gameSucces].success += 1;
+            this.userDataJson.success.push(1);
+        }
+
+
+        let gameSuccessTwo = success.find(s => s.id === 2).game
+        if (gameSucces === gameSuccessTwo) {
+            this.userDataJson.ranking[gameSucces].success += 1;
+            this.userDataJson.success.push(2);
+        }
+
+
+        if (this.userDataJson.success.includes(1) && this.userDataJson.success.includes(2)) {
+            this.userDataJson.success.push(3);
+        }
+
+
+        this.save();
+    }
+
 
     // Items
     getItems() {
@@ -147,8 +206,25 @@ export class UserData {
         this.save();
     }
 
+    // Games
+    getSkinSelected(game) {
+        let gameSkins = this.userDataJson.items.games[game].skins;
+        for (const skin in gameSkins) {
+            if (gameSkins[skin].Selected) {
+                return skin;
+            }
+        }
+        return "default";
+
+    }
+
     save() {
         localStorage.setItem(KEY_USERDATA_LOCALSTORAGE, JSON.stringify(this.userDataJson));
+        if (UserData.AlpineJs) {
+            UserData.AlpineJs.store('user').update();
+        }
+
+
     }
 
     reset() {

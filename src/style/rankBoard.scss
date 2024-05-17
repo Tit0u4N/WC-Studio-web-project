@@ -1,4 +1,16 @@
 .rankBoard{
-  background-color: #644984;
+  min-width: 400px;
+
+  .select {
+    color: var(--Text-paragraphe) !important;
+    background-color: var(--Background-Hover) !important;
+    outline: none !important;
+    border: none !important;
+  }
 }
 
+.div-under-rank-board {
+  padding: 2px !important;
+  background: var(--VGradient-blue-to-red);
+
+}
