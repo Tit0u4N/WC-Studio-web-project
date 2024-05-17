@@ -1,5 +1,4 @@
 import {CardModel} from "./CardModel.js";
-import _ from "../../../../js/libs/lodash.js";
 
 export class GridModel {
 
@@ -18,7 +17,7 @@ export class GridModel {
     }
 
     shuffleCards() {
-        this.cards = _.shuffle(this.cards);
+        this.cards.sort(() => Math.random() - 0.5);
     }
 
     isAllCardsFound() {
