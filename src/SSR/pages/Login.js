@@ -59,7 +59,7 @@ export const LoginAlpineData = {
 
         /* dummy sign in method */
         signIn() {
-            console.log("sign in button clicked !");
+
         }
     })
 }

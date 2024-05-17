@@ -146,7 +146,6 @@ export class UserData {
     setRanking(game, ranking) {
         this.userDataJson.ranking[game.toLowerCase()].score = ranking;
         this.save();
-
     }
 
     // Success
