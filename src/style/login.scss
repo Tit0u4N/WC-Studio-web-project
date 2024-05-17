@@ -3,17 +3,3 @@ input::placeholder{
   color: var(--Placeholder);
 }
 
-.div-under-login-button {
-  padding: 2px !important;
-  background: var(--VGradient-red-to-blue);
-  width: 100vh;
-
-  &:hover {
-    background: var(--VGradient-blue-to-red) !important;
-  }
-
-  &:focus {
-    background: var(--VGradient-red-to-blue);
-  }
-}
-

@@ -1,9 +1,11 @@
 import {FormField} from "../FormField.js";
 import {NeonHeaderBar} from "../NeonHeaderBar.js";
+import { HigherButton } from "../HigherButton.js";
+import {UserData} from "../../../js/global/UserData.js";
 
 export const Informations = (id = "Informations") => {
     return `
-        <div class="flex flex-col justify-between h-full pb-8 pt-4">
+        <div class="flex flex-col justify-between h-full py-4">
         
             ${NeonHeaderBar("Your Username")}
             
@@ -18,6 +20,10 @@ export const Informations = (id = "Informations") => {
             ${FormField("Password", "****************")}
             ${FormField("Confirm Password", "****************")}
             
+            <div class="pt-4">
+                ${HigherButton('savePasswordButton', '', 'Save Changes')}
+            </div>
+            
         </div>
     `
-}
+};
