@@ -90,7 +90,7 @@ const SuccessItem = (id, name, game, imgPath) => {
     <div>
         <div x-data="${alpinDataKey}" class="success-background flex flex-col justify-center items-center overflow-visible rounded-lg">
             <div :class="isUnlocked(${id}) ? 'isUnlocked' : ''" class="success-image-container h-full w-2/3 rounded-full border-4">
-                <img src="../../../public/assets/succes/${imgPath}" alt="succes-icon" class="mx-auto p-2">
+                <img src="/assets/succes/${imgPath}" alt="succes-icon" class="mx-auto p-2">
             </div>
             <div  class="flex flex-col justify-evenly items-center h-2/3">
                 <p class="success-name-text font-light text-slate-50 text-center">${name}</p>
